@@ -1,23 +1,29 @@
 import {View, Text, StyleSheet} from 'react-native';
 import React from 'react';
 
-const TableCell = () => {
+const TableCell = ({
+  projectName,
+  startedOn,
+  status,
+  projectManager,
+  members,
+}) => {
   return (
     <View style={styles.row}>
       <View style={styles.cell}>
-        <Text style={styles.cellText}>Data 1</Text>
+        <Text style={styles.cellText}>{projectName} </Text>
       </View>
       <View style={styles.cell}>
-        <Text style={styles.cellText}>Data 2</Text>
+        <Text style={styles.cellText}>{startedOn} </Text>
       </View>
       <View style={styles.cell}>
-        <Text style={styles.cellText}>Data 3</Text>
+        <Text style={styles.cellText}>{status} </Text>
       </View>
       <View style={styles.cell}>
-        <Text style={styles.cellText}>Data 3</Text>
+        <Text style={styles.cellText}>{projectManager} </Text>
       </View>
       <View style={styles.cell}>
-        <Text style={styles.cellText}>Data 3</Text>
+        <Text style={styles.cellText}>{members} </Text>
       </View>
     </View>
   );
