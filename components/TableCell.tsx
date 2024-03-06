@@ -8,6 +8,19 @@ const TableCell = ({
   projectManager,
   members,
 }) => {
+  const getStatusCellColor = status => {
+    switch (status) {
+      case 'On going':
+        return 'green';
+      case 'In progress':
+        return 'green';
+      case 'Hold':
+        return 'black';
+      case 'Closed':
+        return 'red';
+    }
+  };
+
   return (
     <View style={styles.row}>
       <View style={styles.cell}>
@@ -16,8 +29,24 @@ const TableCell = ({
       <View style={styles.cell}>
         <Text style={styles.cellText}>{startedOn} </Text>
       </View>
-      <View style={styles.cell}>
-        <Text style={styles.cellText}>{status} </Text>
+      <View
+        style={[
+          styles.cell,
+          {
+            backgroundColor: getStatusCellColor(status),
+            borderRadius: 5,
+            paddingVertical: 10,
+          },
+        ]}>
+        <Text
+          style={[
+            styles.cellText,
+            {
+              color: 'white',
+            },
+          ]}>
+          {status}
+        </Text>
       </View>
       <View style={styles.cell}>
         <Text style={styles.cellText}>{projectManager} </Text>
@@ -32,6 +61,7 @@ const TableCell = ({
 const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
+    alignItems: 'center',
   },
   cell: {
     flex: 1,

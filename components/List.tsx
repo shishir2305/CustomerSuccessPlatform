@@ -1,7 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import TableCell from './TableCell';
-import {v4 as uuidv4} from 'uuid';
 
 const projectListArray = [
   {
@@ -46,9 +45,23 @@ const projectListArray = [
     projectManager: 'Dipa Majumdar',
     members: 6,
   },
+  {
+    projectName: 'Food on time7',
+    startedOn: '12 Feb 24',
+    status: 'Hold',
+    projectManager: 'Dipa Majumdar',
+    members: 6,
+  },
+  {
+    projectName: 'Food on time8',
+    startedOn: '12 Feb 24',
+    status: 'Hold',
+    projectManager: 'Dipa Majumdar',
+    members: 6,
+  },
 ];
 
-const Table = () => {
+const Table = ({statusType}) => {
   return (
     <View>
       {/* Table Header */}
@@ -70,9 +83,28 @@ const Table = () => {
         </View>
       </View>
 
-      {projectListArray.map(item => (
-        <TableCell key={item.projectName} {...item} />
-      ))}
+      {statusType === 'all' &&
+        projectListArray.map(item => (
+          <TableCell key={item.projectName} {...item} />
+        ))}
+
+      {(statusType === 'On going' || statusType === 'In progress') &&
+        projectListArray
+          .filter(
+            item => item.status === 'On going' || item.status === 'In progress',
+          )
+          .map(item => <TableCell key={item.projectName} {...item} />)}
+
+      {statusType === 'Closed' &&
+        projectListArray
+          .filter(item => item.status === 'Closed')
+          .map(item => <TableCell key={item.projectName} {...item} />)}
+
+      {statusType === 'Hold' &&
+        projectListArray
+          .filter(item => item.status === 'Hold')
+          .map(item => <TableCell key={item.projectName} {...item} />)}
+      <View style={{height: 100}}></View>
     </View>
   );
 };

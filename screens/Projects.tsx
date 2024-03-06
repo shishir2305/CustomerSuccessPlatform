@@ -7,23 +7,23 @@ const Projects = () => {
     <View style={styles.container}>
       <View style={styles.boxContainer}>
         <View style={styles.box}>
-          <Text>41</Text>
-          <Text>All Projects</Text>
+          <Text style={styles.boxHeading}>41</Text>
+          <Text style={styles.boxContent}>All Projects</Text>
         </View>
 
         <View style={styles.box}>
-          <Text>24</Text>
-          <Text>In Progress</Text>
+          <Text style={styles.boxHeading}>24</Text>
+          <Text style={styles.boxContent}>In Progress</Text>
         </View>
 
         <View style={styles.box}>
-          <Text>12</Text>
-          <Text>Completed</Text>
+          <Text style={styles.boxHeading}>12</Text>
+          <Text style={styles.boxContent}>Completed</Text>
         </View>
 
         <View style={styles.box}>
-          <Text>5</Text>
-          <Text>Hold</Text>
+          <Text style={styles.boxHeading}>5</Text>
+          <Text style={styles.boxContent}>Hold</Text>
         </View>
       </View>
 
@@ -37,24 +37,34 @@ const Projects = () => {
 const styles = StyleSheet.create({
   container: {
     height: '100%',
+    padding: 10,
   },
   boxContainer: {
     height: '35%',
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 20,
+    gap: 15,
     justifyContent: 'center',
-    paddingVertical: 20,
+    paddingVertical: 10,
+    marginBottom: 20,
   },
   box: {
-    height: '47%',
-    width: '45%',
-    backgroundColor: 'pink',
+    height: '49%',
+    width: '47%',
+    backgroundColor: '#E0E5EB',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5,
+    gap: 6,
+  },
+  boxHeading: {
+    fontSize: 30,
+    fontWeight: 'bold',
+  },
+  boxContent: {
+    fontSize: 18,
   },
   projectsListContainer: {
     height: '65%',

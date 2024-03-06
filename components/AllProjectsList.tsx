@@ -5,17 +5,17 @@ import List from './List';
 const AllProjectsList = () => {
   return (
     <View>
-      <View>
-        <Text style={style.heading}>All Projects</Text>
+      <View style={{marginVertical: 10}}>
+        <Text style={styles.heading}>All Projects</Text>
       </View>
       <View>
-        <List />
+        <List statusType="all" />
       </View>
     </View>
   );
 };
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   heading: {
     fontSize: 20,
     fontWeight: 'bold',

@@ -74,6 +74,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     padding: 20,
     justifyContent: 'center',
+    paddingBottom: 200,
   },
   heading: {
     fontSize: 25,
@@ -107,7 +108,7 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     borderRadius: 10,
     alignItems: 'center',
-    marginBottom: 120,
+    marginBottom: 100,
   },
   buttonText: {
     fontSize: 20,
