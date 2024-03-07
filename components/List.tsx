@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import TableCell from './TableCell';
 
 const projectListArray = [
@@ -83,28 +83,31 @@ const Table = ({statusType}) => {
         </View>
       </View>
 
-      {statusType === 'all' &&
-        projectListArray.map(item => (
-          <TableCell key={item.projectName} {...item} />
-        ))}
+      <ScrollView>
+        {statusType === 'all' &&
+          projectListArray.map(item => (
+            <TableCell key={item.projectName} {...item} />
+          ))}
 
-      {(statusType === 'On going' || statusType === 'In progress') &&
-        projectListArray
-          .filter(
-            item => item.status === 'On going' || item.status === 'In progress',
-          )
-          .map(item => <TableCell key={item.projectName} {...item} />)}
+        {(statusType === 'On going' || statusType === 'In progress') &&
+          projectListArray
+            .filter(
+              item =>
+                item.status === 'On going' || item.status === 'In progress',
+            )
+            .map(item => <TableCell key={item.projectName} {...item} />)}
 
-      {statusType === 'Closed' &&
-        projectListArray
-          .filter(item => item.status === 'Closed')
-          .map(item => <TableCell key={item.projectName} {...item} />)}
+        {statusType === 'Closed' &&
+          projectListArray
+            .filter(item => item.status === 'Closed')
+            .map(item => <TableCell key={item.projectName} {...item} />)}
 
-      {statusType === 'Hold' &&
-        projectListArray
-          .filter(item => item.status === 'Hold')
-          .map(item => <TableCell key={item.projectName} {...item} />)}
-      <View style={{height: 100}}></View>
+        {statusType === 'Hold' &&
+          projectListArray
+            .filter(item => item.status === 'Hold')
+            .map(item => <TableCell key={item.projectName} {...item} />)}
+        <View style={{height: 360}}></View>
+      </ScrollView>
     </View>
   );
 };

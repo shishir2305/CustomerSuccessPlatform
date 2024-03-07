@@ -48,12 +48,12 @@ const ProjectsList = () => {
         </View>
       </View>
 
-      <ScrollView>
-        {activeTab === 'all' && <AllProjectsList />}
-        {activeTab === 'inProgress' && <InProgressProjectsList />}
-        {activeTab === 'completed' && <CompletedProjectsList />}
-        {activeTab === 'onHold' && <OnHoldProjectsList />}
-      </ScrollView>
+      {/* <ScrollView> */}
+      {activeTab === 'all' && <AllProjectsList />}
+      {activeTab === 'inProgress' && <InProgressProjectsList />}
+      {activeTab === 'completed' && <CompletedProjectsList />}
+      {activeTab === 'onHold' && <OnHoldProjectsList />}
+      {/* </ScrollView> */}
     </View>
   );
 };
