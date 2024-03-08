@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import React from 'react';
 
-const FillProjectDetails = () => {
+const FillProjectDetails = ({navigation}) => {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.heading}>Add Project Details</Text>
@@ -47,7 +47,11 @@ const FillProjectDetails = () => {
         />
       </View>
 
-      <TouchableOpacity style={styles.button} onPress={() => {}}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          navigation.navigate('InviteClients');
+        }}>
         <Text style={styles.buttonText}>Continue</Text>
       </TouchableOpacity>
     </ScrollView>

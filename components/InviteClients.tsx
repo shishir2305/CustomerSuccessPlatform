@@ -11,7 +11,7 @@ import AntDesignIcons from 'react-native-vector-icons/AntDesign';
 
 const addIcon = <AntDesignIcons name="plus" size={30} color="black" />;
 
-const InviteClients = () => {
+const InviteClients = ({navigation}) => {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.heading}>Invite Clients</Text>
@@ -35,7 +35,11 @@ const InviteClients = () => {
         </Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button} onPress={() => {}}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          navigation.navigate('SelectProjectManager');
+        }}>
         <Text style={styles.buttonText}>Continue</Text>
       </TouchableOpacity>
     </ScrollView>

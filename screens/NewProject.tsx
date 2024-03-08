@@ -3,16 +3,20 @@ import React from 'react';
 import FillProjectDetails from '../components/FillProjectDetails';
 import InviteClients from '../components/InviteClients';
 import SelectProjectManager from '../components/SelectProjectManager';
-import ProjectDetails from '../components/ProjectDetails';
+import {createStackNavigator} from '@react-navigation/stack';
+
+const Stack = createStackNavigator();
 
 const NewProject = () => {
   return (
-    <View>
-      {/* <FillProjectDetails /> */}
-      {/* <InviteClients /> */}
-      {/* <SelectProjectManager /> */}
-      <ProjectDetails />
-    </View>
+    <Stack.Navigator initialRouteName="FillProjectDetails">
+      <Stack.Screen name="FillProjectDetails" component={FillProjectDetails} />
+      <Stack.Screen name="InviteClients" component={InviteClients} />
+      <Stack.Screen
+        name="SelectProjectManager"
+        component={SelectProjectManager}
+      />
+    </Stack.Navigator>
   );
 };
 
