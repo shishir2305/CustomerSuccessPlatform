@@ -1,9 +1,6 @@
 import {View, Text, StyleSheet, Button, ScrollView} from 'react-native';
 import React, {useState} from 'react';
-import AllProjectsList from './AllProjectsList';
-import InProgressProjectsList from './InProgressProjectsList';
-import CompletedProjectsList from './CompletedProjectsList';
-import OnHoldProjectsList from './OnHoldProjectsList';
+import List from './List';
 
 const ProjectsList = () => {
   const [activeTab, setActiveTab] = useState('all');
@@ -48,12 +45,10 @@ const ProjectsList = () => {
         </View>
       </View>
 
-      {/* <ScrollView> */}
-      {activeTab === 'all' && <AllProjectsList />}
-      {activeTab === 'inProgress' && <InProgressProjectsList />}
-      {activeTab === 'completed' && <CompletedProjectsList />}
-      {activeTab === 'onHold' && <OnHoldProjectsList />}
-      {/* </ScrollView> */}
+      {activeTab === 'all' && <List statusType="all" />}
+      {activeTab === 'inProgress' && <List statusType="In progress" />}
+      {activeTab === 'completed' && <List statusType="Closed" />}
+      {activeTab === 'onHold' && <List statusType="Hold" />}
     </View>
   );
 };
