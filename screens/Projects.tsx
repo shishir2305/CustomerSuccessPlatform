@@ -3,7 +3,6 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {View, Text, StyleSheet} from 'react-native';
 import ProjectsList from '../components/ProjectsList';
-import ProjectOverview from '../components/ProjectOverview';
 import ProjectDetails from '../components/ProjectDetails';
 
 const Stack = createStackNavigator();
@@ -19,7 +18,7 @@ const Projects = () => {
       <Stack.Screen
         name="ProjectDetails"
         component={ProjectDetails}
-        options={{headerShown: false}}
+        // options={{headerShown: false}}
       />
     </Stack.Navigator>
   );

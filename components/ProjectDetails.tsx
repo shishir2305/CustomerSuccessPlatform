@@ -70,10 +70,18 @@ const ProjectDetails = ({route}) => {
           </View>
         </View>
       </ScrollView>
-      {activeTab === 'projectOverview' && <ProjectOverview />}
-      {activeTab === 'scopeAndStack' && <ScopeAndStack />}
-      {activeTab === 'escalationMatrix' && <EscalationMatrix />}
-      {activeTab === 'versionHistory' && <VersionHistory />}
+      {activeTab === 'projectOverview' && (
+        <ProjectOverview setActiveTab={setActiveTab} />
+      )}
+      {activeTab === 'scopeAndStack' && (
+        <ScopeAndStack setActiveTab={setActiveTab} />
+      )}
+      {activeTab === 'escalationMatrix' && (
+        <EscalationMatrix setActiveTab={setActiveTab} />
+      )}
+      {activeTab === 'versionHistory' && (
+        <VersionHistory setActiveTab={setActiveTab} />
+      )}
       {activeTab === 'files' && <Files />}
     </View>
   );

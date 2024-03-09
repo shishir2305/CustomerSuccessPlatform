@@ -9,7 +9,7 @@ const items = [
   {label: 'Shishir Jha', value: 'shishir jha'},
 ];
 
-const EscalationMatrix = () => {
+const EscalationMatrix = ({setActiveTab}) => {
   const [isOpen1, setIsOpen1] = useState(false);
   const [currentValue1, setCurrentValue1] = useState('');
   const [isOpen2, setIsOpen2] = useState(false);
@@ -63,6 +63,7 @@ const EscalationMatrix = () => {
                 placeholder="Select"
                 showTickIcon={false}
                 disableBorderRadius={true}
+                maxHeight={100}
               />
             </View>
             <View style={styles.cell}>
@@ -90,6 +91,7 @@ const EscalationMatrix = () => {
                 placeholder="Select"
                 showTickIcon={false}
                 disableBorderRadius={true}
+                maxHeight={100}
               />
             </View>
             <View style={styles.cell}>
@@ -97,7 +99,12 @@ const EscalationMatrix = () => {
             </View>
           </View>
 
-          <View style={[styles.row, {alignItems: 'center'}]}>
+          <View
+            style={[
+              styles.row,
+              {alignItems: 'center'},
+              isOpen2 && {marginTop: 100},
+            ]}>
             <View style={styles.cell}>
               <Text style={styles.cellText}>Level 3</Text>
             </View>
@@ -115,6 +122,7 @@ const EscalationMatrix = () => {
                 placeholder="Select"
                 showTickIcon={false}
                 disableBorderRadius={true}
+                maxHeight={100}
               />
             </View>
             <View style={styles.cell}>
@@ -123,7 +131,7 @@ const EscalationMatrix = () => {
           </View>
         </View>
 
-        <View>
+        <View style={isOpen3 && {marginTop: 100}}>
           <Text style={{fontSize: 20, marginVertical: 10}}>
             Financial Escalation Matrix
           </Text>
@@ -154,6 +162,7 @@ const EscalationMatrix = () => {
                 placeholder="Select"
                 showTickIcon={false}
                 disableBorderRadius={true}
+                maxHeight={100}
               />
             </View>
             <View style={styles.cell}>
@@ -161,7 +170,12 @@ const EscalationMatrix = () => {
             </View>
           </View>
 
-          <View style={[styles.row, {alignItems: 'center'}]}>
+          <View
+            style={[
+              styles.row,
+              {alignItems: 'center'},
+              isOpen4 && {marginTop: 100},
+            ]}>
             <View style={styles.cell}>
               <Text style={styles.cellText}>Level 2</Text>
             </View>
@@ -176,6 +190,7 @@ const EscalationMatrix = () => {
                 placeholder="Select"
                 showTickIcon={false}
                 disableBorderRadius={true}
+                maxHeight={100}
               />
             </View>
             <View style={styles.cell}>
@@ -183,7 +198,12 @@ const EscalationMatrix = () => {
             </View>
           </View>
 
-          <View style={[styles.row, {alignItems: 'center'}]}>
+          <View
+            style={[
+              styles.row,
+              {alignItems: 'center'},
+              isOpen5 && {marginTop: 100},
+            ]}>
             <View style={styles.cell}>
               <Text style={styles.cellText}>Level 3</Text>
             </View>
@@ -192,7 +212,6 @@ const EscalationMatrix = () => {
                 style={{
                   borderWidth: 0,
                   backgroundColor: 'transparent',
-                  zIndex: 99,
                 }}
                 items={items}
                 open={isOpen6}
@@ -202,6 +221,7 @@ const EscalationMatrix = () => {
                 placeholder="Select"
                 showTickIcon={false}
                 disableBorderRadius={true}
+                maxHeight={100}
               />
             </View>
             <View style={styles.cell}>
@@ -210,7 +230,7 @@ const EscalationMatrix = () => {
           </View>
         </View>
 
-        <View>
+        <View style={[{alignItems: 'center'}, isOpen6 && {marginTop: 100}]}>
           <Text style={{fontSize: 20, marginVertical: 10}}>
             Technical Escalation Matrix
           </Text>
@@ -241,6 +261,7 @@ const EscalationMatrix = () => {
                 placeholder="Select"
                 showTickIcon={false}
                 disableBorderRadius={true}
+                maxHeight={100}
               />
             </View>
             <View style={styles.cell}>
@@ -248,7 +269,12 @@ const EscalationMatrix = () => {
             </View>
           </View>
 
-          <View style={[styles.row, {alignItems: 'center'}]}>
+          <View
+            style={[
+              styles.row,
+              {alignItems: 'center'},
+              isOpen7 && {marginTop: 100},
+            ]}>
             <View style={styles.cell}>
               <Text style={styles.cellText}>Level 2</Text>
             </View>
@@ -263,6 +289,7 @@ const EscalationMatrix = () => {
                 placeholder="Select"
                 showTickIcon={false}
                 disableBorderRadius={true}
+                maxHeight={100}
               />
             </View>
             <View style={styles.cell}>
@@ -270,7 +297,12 @@ const EscalationMatrix = () => {
             </View>
           </View>
 
-          <View style={[styles.row, {alignItems: 'center'}]}>
+          <View
+            style={[
+              styles.row,
+              {alignItems: 'center'},
+              isOpen8 && {marginTop: 100},
+            ]}>
             <View style={styles.cell}>
               <Text style={styles.cellText}>Level 3</Text>
             </View>
@@ -288,6 +320,7 @@ const EscalationMatrix = () => {
                 placeholder="Select"
                 showTickIcon={false}
                 disableBorderRadius={true}
+                maxHeight={100}
               />
             </View>
             <View style={styles.cell}>
@@ -296,7 +329,11 @@ const EscalationMatrix = () => {
           </View>
         </View>
 
-        <TouchableOpacity style={styles.button} onPress={() => {}}>
+        <TouchableOpacity
+          style={[styles.button, isOpen9 && {marginTop: 100}]}
+          onPress={() => {
+            setActiveTab('versionHistory');
+          }}>
           <Text style={styles.buttonText}>Continue</Text>
         </TouchableOpacity>
       </View>

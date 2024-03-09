@@ -18,7 +18,7 @@ const items = [
   {label: 'Database', value: 'database'},
 ];
 
-const ScopeAndStack = () => {
+const ScopeAndStack = ({setActiveTab}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [currentValue, setCurrentValue] = useState([]);
 
@@ -45,7 +45,11 @@ const ScopeAndStack = () => {
           style={[styles.input, styles.inputMedium]}
         />
       </View>
-      <TouchableOpacity style={styles.button} onPress={() => {}}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          setActiveTab('escalationMatrix');
+        }}>
         <Text style={styles.buttonText}>Continue</Text>
       </TouchableOpacity>
     </View>

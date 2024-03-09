@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import React from 'react';
 
-const ProjectOverview = () => {
+const ProjectOverview = ({setActiveTab}) => {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.inputContainer}>
@@ -62,7 +62,11 @@ const ProjectOverview = () => {
         </View>
       </View>
 
-      <TouchableOpacity style={styles.button} onPress={() => {}}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          setActiveTab('scopeAndStack');
+        }}>
         <Text style={styles.buttonText}>Continue</Text>
       </TouchableOpacity>
     </ScrollView>
