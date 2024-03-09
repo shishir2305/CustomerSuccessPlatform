@@ -55,7 +55,7 @@ const ProjectOverview = ({setActiveTab}) => {
             alignItems: 'center',
           }}>
           <TextInput
-            placeholder="Enter name"
+            placeholder="Enter budget"
             style={[styles.input, {width: '80%'}]}
           />
           <Text style={{fontSize: 35}}>$</Text>
@@ -78,7 +78,6 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     padding: 20,
     justifyContent: 'center',
-    paddingBottom: 200,
   },
   heading: {
     fontSize: 25,

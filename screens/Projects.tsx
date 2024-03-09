@@ -1,9 +1,19 @@
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {View, Text, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TextInput,
+  TouchableOpacity,
+} from 'react-native';
 import ProjectsList from '../components/ProjectsList';
 import ProjectDetails from '../components/ProjectDetails';
+import AntDesignIcons from 'react-native-vector-icons/AntDesign';
+import {useNavigation} from '@react-navigation/native';
+
+const searchIcons = <AntDesignIcons name="search1" size={30} color="grey" />;
 
 const Stack = createStackNavigator();
 
@@ -25,8 +35,36 @@ const Projects = () => {
 };
 
 const ProjectsScreen = () => {
+  const navigation = useNavigation();
+  const openDrawer = () => {
+    navigation.openDrawer();
+  };
   return (
     <View style={styles.container}>
+      <View style={styles.header}>
+        <TouchableOpacity
+          style={{
+            borderRadius: 50,
+            display: 'flex',
+            alignItems: 'center',
+            gap: 5,
+          }}
+          onPress={openDrawer}>
+          <Image
+            source={require('../assets/profilepic.jpg')}
+            style={{height: 55, width: 55, borderRadius: 50}}
+          />
+          <Text style={{fontSize: 16}}>Auditor</Text>
+        </TouchableOpacity>
+        <View style={styles.searchContainer}>
+          <TextInput
+            style={styles.searchInput}
+            placeholder="Search..."
+            placeholderTextColor="#999"
+          />
+          {searchIcons}
+        </View>
+      </View>
       <View style={styles.boxContainer}>
         <View style={styles.box}>
           <Text style={styles.boxHeading}>41</Text>
@@ -62,14 +100,14 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   boxContainer: {
-    height: '35%',
+    height: '30%',
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
     gap: 15,
     justifyContent: 'center',
     paddingVertical: 10,
-    marginBottom: 20,
+    marginBottom: 5,
   },
   box: {
     height: '49%',
@@ -89,7 +127,27 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   projectsListContainer: {
-    height: '65%',
+    height: '70%',
+  },
+  header: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+  },
+  searchContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '80%',
+    backgroundColor: '#fff',
+    borderRadius: 5,
+  },
+  searchInput: {
+    padding: 15,
+    borderRadius: 5,
+    fontSize: 20,
+    width: '80%',
   },
 });
 

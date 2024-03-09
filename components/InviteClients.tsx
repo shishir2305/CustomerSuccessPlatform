@@ -1,3 +1,4 @@
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -6,41 +7,85 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import React from 'react';
 import AntDesignIcons from 'react-native-vector-icons/AntDesign';
+import {useNavigation} from '@react-navigation/native';
 
+const backIcon = <AntDesignIcons name="arrowleft" size={30} color="black" />;
 const addIcon = <AntDesignIcons name="plus" size={30} color="black" />;
+const deleteIcon = <AntDesignIcons name="close" size={20} color="black" />;
 
-const InviteClients = ({navigation}) => {
+const InviteClients = () => {
+  const navigation = useNavigation();
+  const [clientName, setClientName] = useState('');
+  const [clientEmail, setClientEmail] = useState('');
+  const [emailsList, setEmailsList] = useState([]);
+
+  const handleBack = () => {
+    navigation.goBack();
+  };
+
+  const handleAddEmail = () => {
+    if (clientEmail.trim() !== '') {
+      setEmailsList([...emailsList, clientEmail]);
+      setClientEmail('');
+    }
+  };
+
+  const handleDeleteEmail = email => {
+    setEmailsList(emailsList.filter(e => e !== email));
+  };
+
+  const handleContinue = () => {
+    navigation.navigate('SelectProjectManager');
+  };
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.heading}>Invite Clients</Text>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={handleBack}>{backIcon}</TouchableOpacity>
+        <Text style={styles.heading}>Invite Clients</Text>
+      </View>
 
       <View style={styles.inputContainer}>
         <Text style={styles.inputLabel}>Client Name</Text>
-        <TextInput placeholder="Client name" style={styles.input} />
+        <TextInput
+          placeholder="Client name"
+          style={styles.input}
+          value={clientName}
+          onChangeText={setClientName}
+        />
       </View>
 
       <View style={styles.inputContainer}>
         <Text style={styles.inputLabel}>Client Email</Text>
-        <TextInput placeholder="example@work.com" style={styles.input} />
+        <View style={styles.emailInputContainer}>
+          <TextInput
+            placeholder="example@work.com"
+            style={[styles.input, styles.emailInput]}
+            value={clientEmail.toLocaleLowerCase()}
+            onChangeText={setClientEmail}
+          />
+        </View>
       </View>
 
-      <TouchableOpacity
-        style={[styles.button, styles.addButton]}
-        onPress={() => {}}>
+      <View style={styles.emailsList}>
+        {emailsList.map((email, index) => (
+          <View style={styles.emailItem} key={index}>
+            <Text style={{fontSize: 20}}>{email}</Text>
+            <TouchableOpacity onPress={() => handleDeleteEmail(email)}>
+              {deleteIcon}
+            </TouchableOpacity>
+          </View>
+        ))}
+      </View>
+
+      <TouchableOpacity style={styles.addButton} onPress={handleAddEmail}>
+        <Text style={styles.buttonText}>Add</Text>
         {addIcon}
-        <Text style={[styles.buttonText, {color: 'black', fontWeight: '500'}]}>
-          Add
-        </Text>
       </TouchableOpacity>
 
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-          navigation.navigate('SelectProjectManager');
-        }}>
-        <Text style={styles.buttonText}>Continue</Text>
+      <TouchableOpacity style={styles.button} onPress={handleContinue}>
+        <Text style={[styles.buttonText, {color: 'white'}]}>Continue</Text>
       </TouchableOpacity>
     </ScrollView>
   );
@@ -48,13 +93,18 @@ const InviteClients = ({navigation}) => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
+    padding: 10,
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 20,
   },
   heading: {
     fontSize: 25,
     fontWeight: 'bold',
-    marginBottom: 20,
     textAlign: 'center',
+    flex: 1,
   },
   inputContainer: {
     marginBottom: 20,
@@ -69,14 +119,34 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     borderWidth: 1,
     paddingHorizontal: 10,
+    fontSize: 18,
+  },
+  emailInputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  emailInput: {
+    flex: 1,
+  },
+  emailsList: {
+    marginBottom: 20,
+  },
+  emailItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
+    gap: 10,
   },
   addButton: {
-    marginTop: 20,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
-    gap: 10,
     backgroundColor: 'lightgrey',
+    paddingVertical: 16,
+    borderRadius: 10,
+    alignItems: 'center',
+    marginVertical: 30,
+    gap: 10,
   },
   button: {
     backgroundColor: '#007bff',
@@ -88,7 +158,7 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: 'white',
+    color: 'black',
   },
 });
 

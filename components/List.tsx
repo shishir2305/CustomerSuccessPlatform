@@ -121,10 +121,12 @@ const styles = StyleSheet.create({
   },
   cell: {
     flex: 1,
-    padding: 8,
+    paddingVertical: 8,
+    paddingHorizontal: 5,
   },
   cellText: {
     textAlign: 'center',
+    fontSize: 15,
   },
 });
 

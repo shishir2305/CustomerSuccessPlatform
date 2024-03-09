@@ -22,13 +22,16 @@ const FillProjectDetails = ({navigation}) => {
 
       <View style={styles.inputContainer}>
         <Text style={styles.inputLabel}>Project Brief</Text>
-        <TextInput style={[styles.input, styles.inputLarge]} />
+        <TextInput
+          style={[styles.input, styles.inputLarge]}
+          placeholder="Write here"
+        />
       </View>
 
       <View style={styles.inputContainer}>
         <Text style={styles.inputLabel}>Purpose</Text>
         <TextInput
-          placeholder="Enter name"
+          placeholder="Write here"
           style={[styles.input, styles.inputMedium]}
         />
       </View>
@@ -36,7 +39,7 @@ const FillProjectDetails = ({navigation}) => {
       <View style={styles.inputContainer}>
         <Text style={styles.inputLabel}>Goals</Text>
         <TextInput
-          placeholder="Enter name"
+          placeholder="Write here"
           style={[styles.input, styles.inputMedium]}
         />
       </View>
@@ -44,9 +47,26 @@ const FillProjectDetails = ({navigation}) => {
       <View style={styles.inputContainer}>
         <Text style={styles.inputLabel}>Objectives</Text>
         <TextInput
-          placeholder="Enter name"
+          placeholder="Write here"
           style={[styles.input, styles.inputMedium]}
         />
+      </View>
+
+      <View style={styles.inputContainer}>
+        <Text style={styles.inputLabel}>Budget</Text>
+        <View
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            gap: 20,
+            alignItems: 'center',
+          }}>
+          <TextInput
+            placeholder="Enter name"
+            style={[styles.input, {width: '80%'}]}
+          />
+          <Text style={{fontSize: 35}}>$</Text>
+        </View>
       </View>
 
       <TouchableOpacity
@@ -87,6 +107,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     paddingHorizontal: 10,
     borderRadius: 5,
+    fontSize: 18,
   },
   inputLarge: {
     height: 200,

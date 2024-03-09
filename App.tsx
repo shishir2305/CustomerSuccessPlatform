@@ -28,21 +28,6 @@ const App = () => {
   return (
     <NavigationContainer>
       <SafeAreaView style={{flex: 1}}>
-        <View style={styles.header}>
-          <TouchableOpacity style={{borderRadius: 50}}>
-            <Image
-              source={require('./assets/logo.png')}
-              style={{height: 60, width: 60, borderRadius: 50}}
-            />
-          </TouchableOpacity>
-          <View style={styles.searchContainer}>
-            <TextInput
-              style={styles.searchInput}
-              placeholder="Search..."
-              placeholderTextColor="#999"
-            />
-          </View>
-        </View>
         <Drawer.Navigator initialRouteName="Projects">
           <Drawer.Screen
             name="New Project"
@@ -53,7 +38,7 @@ const App = () => {
                 <AntDesignIcons name="plus" size={30} color="black" />
               ),
               drawerLabelStyle: {
-                fontSize: 20,
+                fontSize: 18,
                 color: 'black',
               },
               headerShown: false,
@@ -72,7 +57,7 @@ const App = () => {
                 />
               ),
               drawerLabelStyle: {
-                fontSize: 20,
+                fontSize: 18,
                 color: 'black',
               },
               headerShown: false,
@@ -87,7 +72,7 @@ const App = () => {
                 <AntDesignIcons name="user" size={30} color="black" />
               ),
               drawerLabelStyle: {
-                fontSize: 20,
+                fontSize: 18,
                 color: 'black',
               },
               headerShown: false,
@@ -102,7 +87,7 @@ const App = () => {
                 <AntDesignIcons name="adduser" size={30} color="black" />
               ),
               drawerLabelStyle: {
-                fontSize: 20,
+                fontSize: 18,
                 color: 'black',
               },
               headerShown: false,
@@ -117,7 +102,7 @@ const App = () => {
                 <AntDesignIcons name="setting" size={30} color="black" />
               ),
               drawerLabelStyle: {
-                fontSize: 20,
+                fontSize: 18,
                 color: 'black',
               },
               headerShown: false,

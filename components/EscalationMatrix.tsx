@@ -11,23 +11,23 @@ const items = [
 
 const EscalationMatrix = ({setActiveTab}) => {
   const [isOpen1, setIsOpen1] = useState(false);
-  const [currentValue1, setCurrentValue1] = useState('');
+  const [currentValue1, setCurrentValue1] = useState('dipa majumdar');
   const [isOpen2, setIsOpen2] = useState(false);
-  const [currentValue2, setCurrentValue2] = useState('');
+  const [currentValue2, setCurrentValue2] = useState('dipa majumdar');
   const [isOpen3, setIsOpen3] = useState(false);
-  const [currentValue3, setCurrentValue3] = useState('');
+  const [currentValue3, setCurrentValue3] = useState('dipa majumdar');
   const [isOpen4, setIsOpen4] = useState(false);
-  const [currentValue4, setCurrentValue4] = useState('');
+  const [currentValue4, setCurrentValue4] = useState('dipa majumdar');
   const [isOpen5, setIsOpen5] = useState(false);
-  const [currentValue5, setCurrentValue5] = useState('');
+  const [currentValue5, setCurrentValue5] = useState('dipa majumdar');
   const [isOpen6, setIsOpen6] = useState(false);
-  const [currentValue6, setCurrentValue6] = useState('');
+  const [currentValue6, setCurrentValue6] = useState('dipa majumdar');
   const [isOpen7, setIsOpen7] = useState(false);
-  const [currentValue7, setCurrentValue7] = useState('');
+  const [currentValue7, setCurrentValue7] = useState('dipa majumdar');
   const [isOpen8, setIsOpen8] = useState(false);
-  const [currentValue8, setCurrentValue8] = useState('');
+  const [currentValue8, setCurrentValue8] = useState('dipa majumdar');
   const [isOpen9, setIsOpen9] = useState(false);
-  const [currentValue9, setCurrentValue9] = useState('');
+  const [currentValue9, setCurrentValue9] = useState('dipa majumdar');
 
   return (
     <ScrollView>
@@ -344,7 +344,6 @@ const EscalationMatrix = ({setActiveTab}) => {
 const styles = StyleSheet.create({
   container: {
     padding: 10,
-    marginBottom: 150,
   },
   row: {
     flexDirection: 'row',
