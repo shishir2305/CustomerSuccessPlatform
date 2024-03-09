@@ -6,11 +6,12 @@ import EscalationMatrix from './EscalationMatrix';
 import VersionHistory from './VersionHistory';
 import Files from './Files';
 
-const ProjectDetails = () => {
+const ProjectDetails = ({route}) => {
   const [activeTab, setActiveTab] = useState('projectOverview');
+  const {projectName} = route.params;
   return (
     <View>
-      <Text style={styles.heading}>Food on time</Text>
+      <Text style={styles.heading}>{projectName}</Text>
       <ScrollView
         horizontal={true}
         showsVerticalScrollIndicator={false}

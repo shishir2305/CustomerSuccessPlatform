@@ -1,5 +1,7 @@
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import React from 'react';
+import {useNavigation} from '@react-navigation/native';
+import ProjectOverview from './ProjectOverview';
 
 const TableCell = ({
   projectName,
@@ -21,8 +23,14 @@ const TableCell = ({
     }
   };
 
+  const navigation = useNavigation();
+
   return (
-    <View style={styles.row}>
+    <TouchableOpacity
+      style={styles.row}
+      onPress={() => {
+        navigation.navigate('ProjectDetails', {projectName});
+      }}>
       <View style={styles.cell}>
         <Text style={styles.cellText}>{projectName} </Text>
       </View>
@@ -54,7 +62,7 @@ const TableCell = ({
       <View style={styles.cell}>
         <Text style={styles.cellText}>{members} </Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

@@ -1,8 +1,31 @@
-import {View, Text, StyleSheet} from 'react-native';
+import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {View, Text, StyleSheet} from 'react-native';
 import ProjectsList from '../components/ProjectsList';
+import ProjectOverview from '../components/ProjectOverview';
+import ProjectDetails from '../components/ProjectDetails';
+
+const Stack = createStackNavigator();
 
 const Projects = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="ProjectsScreen"
+        component={ProjectsScreen}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="ProjectDetails"
+        component={ProjectDetails}
+        options={{headerShown: false}}
+      />
+    </Stack.Navigator>
+  );
+};
+
+const ProjectsScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.boxContainer}>

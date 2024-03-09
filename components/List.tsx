@@ -106,7 +106,7 @@ const Table = ({statusType}) => {
           projectListArray
             .filter(item => item.status === 'Hold')
             .map(item => <TableCell key={item.projectName} {...item} />)}
-        <View style={{height: 360}}></View>
+        <View style={{height: 150}}></View>
       </ScrollView>
     </View>
   );

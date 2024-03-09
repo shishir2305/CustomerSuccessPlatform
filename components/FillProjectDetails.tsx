@@ -10,7 +10,9 @@ import React from 'react';
 
 const FillProjectDetails = ({navigation}) => {
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <ScrollView
+      contentContainerStyle={styles.container}
+      showsVerticalScrollIndicator={false}>
       <Text style={styles.heading}>Add Project Details</Text>
 
       <View style={styles.inputContainer}>
@@ -61,13 +63,14 @@ const FillProjectDetails = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    padding: 20,
+    padding: 10,
     justifyContent: 'center',
+    backgroundColor: 'white',
   },
   heading: {
     fontSize: 25,
     fontWeight: 'bold',
-    marginBottom: 20,
+    marginBottom: 15,
     textAlign: 'center',
   },
   inputContainer: {

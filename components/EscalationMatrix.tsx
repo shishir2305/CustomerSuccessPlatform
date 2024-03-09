@@ -16,6 +16,18 @@ const EscalationMatrix = () => {
   const [currentValue2, setCurrentValue2] = useState('');
   const [isOpen3, setIsOpen3] = useState(false);
   const [currentValue3, setCurrentValue3] = useState('');
+  const [isOpen4, setIsOpen4] = useState(false);
+  const [currentValue4, setCurrentValue4] = useState('');
+  const [isOpen5, setIsOpen5] = useState(false);
+  const [currentValue5, setCurrentValue5] = useState('');
+  const [isOpen6, setIsOpen6] = useState(false);
+  const [currentValue6, setCurrentValue6] = useState('');
+  const [isOpen7, setIsOpen7] = useState(false);
+  const [currentValue7, setCurrentValue7] = useState('');
+  const [isOpen8, setIsOpen8] = useState(false);
+  const [currentValue8, setCurrentValue8] = useState('');
+  const [isOpen9, setIsOpen9] = useState(false);
+  const [currentValue9, setCurrentValue9] = useState('');
 
   return (
     <ScrollView>
@@ -58,7 +70,12 @@ const EscalationMatrix = () => {
             </View>
           </View>
 
-          <View style={[styles.row, {alignItems: 'center'}]}>
+          <View
+            style={[
+              styles.row,
+              {alignItems: 'center'},
+              isOpen1 && {marginTop: 100},
+            ]}>
             <View style={styles.cell}>
               <Text style={styles.cellText}>Level 2</Text>
             </View>
@@ -89,7 +106,6 @@ const EscalationMatrix = () => {
                 style={{
                   borderWidth: 0,
                   backgroundColor: 'transparent',
-                  zIndex: 99,
                 }}
                 items={items}
                 open={isOpen3}
@@ -131,10 +147,10 @@ const EscalationMatrix = () => {
               <DropDownPicker
                 style={{borderWidth: 0, backgroundColor: 'transparent'}}
                 items={items}
-                open={isOpen1}
-                setOpen={() => setIsOpen1(!isOpen1)}
+                open={isOpen4}
+                setOpen={() => setIsOpen4(!isOpen4)}
                 value={currentValue1}
-                setValue={val => setCurrentValue1(val)}
+                setValue={val => setCurrentValue4(val)}
                 placeholder="Select"
                 showTickIcon={false}
                 disableBorderRadius={true}
@@ -153,10 +169,10 @@ const EscalationMatrix = () => {
               <DropDownPicker
                 style={{borderWidth: 0, backgroundColor: 'transparent'}}
                 items={items}
-                open={isOpen2}
-                setOpen={() => setIsOpen2(!isOpen2)}
-                value={currentValue2}
-                setValue={val => setCurrentValue2(val)}
+                open={isOpen5}
+                setOpen={() => setIsOpen5(!isOpen5)}
+                value={currentValue5}
+                setValue={val => setCurrentValue5(val)}
                 placeholder="Select"
                 showTickIcon={false}
                 disableBorderRadius={true}
@@ -179,10 +195,10 @@ const EscalationMatrix = () => {
                   zIndex: 99,
                 }}
                 items={items}
-                open={isOpen3}
-                setOpen={() => setIsOpen3(!isOpen3)}
-                value={currentValue3}
-                setValue={val => setCurrentValue3(val)}
+                open={isOpen6}
+                setOpen={() => setIsOpen6(!isOpen6)}
+                value={currentValue6}
+                setValue={val => setCurrentValue6(val)}
                 placeholder="Select"
                 showTickIcon={false}
                 disableBorderRadius={true}
@@ -218,10 +234,10 @@ const EscalationMatrix = () => {
               <DropDownPicker
                 style={{borderWidth: 0, backgroundColor: 'transparent'}}
                 items={items}
-                open={isOpen1}
-                setOpen={() => setIsOpen1(!isOpen1)}
-                value={currentValue1}
-                setValue={val => setCurrentValue1(val)}
+                open={isOpen7}
+                setOpen={() => setIsOpen7(!isOpen7)}
+                value={currentValue7}
+                setValue={val => setCurrentValue7(val)}
                 placeholder="Select"
                 showTickIcon={false}
                 disableBorderRadius={true}
@@ -240,10 +256,10 @@ const EscalationMatrix = () => {
               <DropDownPicker
                 style={{borderWidth: 0, backgroundColor: 'transparent'}}
                 items={items}
-                open={isOpen2}
-                setOpen={() => setIsOpen2(!isOpen2)}
-                value={currentValue2}
-                setValue={val => setCurrentValue2(val)}
+                open={isOpen8}
+                setOpen={() => setIsOpen8(!isOpen8)}
+                value={currentValue8}
+                setValue={val => setCurrentValue8(val)}
                 placeholder="Select"
                 showTickIcon={false}
                 disableBorderRadius={true}
@@ -263,13 +279,12 @@ const EscalationMatrix = () => {
                 style={{
                   borderWidth: 0,
                   backgroundColor: 'transparent',
-                  zIndex: 99,
                 }}
                 items={items}
-                open={isOpen3}
-                setOpen={() => setIsOpen3(!isOpen3)}
-                value={currentValue3}
-                setValue={val => setCurrentValue3(val)}
+                open={isOpen9}
+                setOpen={() => setIsOpen9(!isOpen9)}
+                value={currentValue9}
+                setValue={val => setCurrentValue9(val)}
                 placeholder="Select"
                 showTickIcon={false}
                 disableBorderRadius={true}

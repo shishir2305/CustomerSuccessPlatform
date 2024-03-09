@@ -48,9 +48,7 @@ const InviteClients = ({navigation}) => {
 
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1,
     padding: 20,
-    justifyContent: 'center',
   },
   heading: {
     fontSize: 25,
