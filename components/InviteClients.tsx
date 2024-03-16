@@ -16,8 +16,7 @@ const deleteIcon = <AntDesignIcons name="close" size={20} color="black" />;
 
 const InviteClients = () => {
   const navigation = useNavigation();
-  const [clientName, setClientName] = useState('');
-  const [clientEmail, setClientEmail] = useState('');
+  const [clientInfo, setClientInfo] = useState({name: '', email: ''});
   const [emailsList, setEmailsList] = useState([]);
 
   const handleBack = () => {
@@ -25,14 +24,14 @@ const InviteClients = () => {
   };
 
   const handleAddEmail = () => {
-    if (clientEmail.trim() !== '') {
-      setEmailsList([...emailsList, clientEmail]);
-      setClientEmail('');
+    if (clientInfo.email.trim() !== '') {
+      setEmailsList([...emailsList, clientInfo]);
+      setClientInfo({name: '', email: ''});
     }
   };
 
   const handleDeleteEmail = email => {
-    setEmailsList(emailsList.filter(e => e !== email));
+    setEmailsList(emailsList.filter(e => e.email !== email));
   };
 
   const handleContinue = () => {
@@ -51,28 +50,28 @@ const InviteClients = () => {
         <TextInput
           placeholder="Client name"
           style={styles.input}
-          value={clientName}
-          onChangeText={setClientName}
+          value={clientInfo.name}
+          onChangeText={text => setClientInfo({...clientInfo, name: text})}
         />
       </View>
 
       <View style={styles.inputContainer}>
         <Text style={styles.inputLabel}>Client Email</Text>
-        <View style={styles.emailInputContainer}>
-          <TextInput
-            placeholder="example@work.com"
-            style={[styles.input, styles.emailInput]}
-            value={clientEmail.toLocaleLowerCase()}
-            onChangeText={setClientEmail}
-          />
-        </View>
+        <TextInput
+          placeholder="example@work.com"
+          style={styles.input}
+          value={clientInfo.email.toLowerCase()}
+          onChangeText={text => setClientInfo({...clientInfo, email: text})}
+        />
       </View>
 
       <View style={styles.emailsList}>
-        {emailsList.map((email, index) => (
+        {emailsList.map((client, index) => (
           <View style={styles.emailItem} key={index}>
-            <Text style={{fontSize: 20}}>{email}</Text>
-            <TouchableOpacity onPress={() => handleDeleteEmail(email)}>
+            <Text style={{fontSize: 20}}>
+              {client.name} - {client.email}
+            </Text>
+            <TouchableOpacity onPress={() => handleDeleteEmail(client.email)}>
               {deleteIcon}
             </TouchableOpacity>
           </View>
@@ -120,13 +119,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     paddingHorizontal: 10,
     fontSize: 18,
-  },
-  emailInputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  emailInput: {
-    flex: 1,
   },
   emailsList: {
     marginBottom: 20,
