@@ -21,96 +21,99 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
+import UserContextProvider from './context/UserContextProvider';
 
 const Drawer = createDrawerNavigator();
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <SafeAreaView style={{flex: 1}}>
-        <Drawer.Navigator initialRouteName="Projects">
-          <Drawer.Screen
-            name="New Project"
-            component={NewProject}
-            options={{
-              drawerLabel: 'New Project',
-              drawerIcon: ({color, size}) => (
-                <AntDesignIcons name="plus" size={30} color="black" />
-              ),
-              drawerLabelStyle: {
-                fontSize: 18,
-                color: 'black',
-              },
-              headerShown: false,
-            }}
-          />
-          <Drawer.Screen
-            name="Projects"
-            component={Projects}
-            options={{
-              drawerLabel: 'Projects',
-              drawerIcon: ({color, size}) => (
-                <MaterialCommunityIcons
-                  name="bag-personal-outline"
-                  size={30}
-                  color="black"
-                />
-              ),
-              drawerLabelStyle: {
-                fontSize: 18,
-                color: 'black',
-              },
-              headerShown: false,
-            }}
-          />
-          <Drawer.Screen
-            name="Project Managers"
-            component={ProjectManagers}
-            options={{
-              drawerLabel: 'Project Managers',
-              drawerIcon: ({color, size}) => (
-                <AntDesignIcons name="user" size={30} color="black" />
-              ),
-              drawerLabelStyle: {
-                fontSize: 18,
-                color: 'black',
-              },
-              headerShown: false,
-            }}
-          />
-          <Drawer.Screen
-            name="Employees"
-            component={Employees}
-            options={{
-              drawerLabel: 'Employees',
-              drawerIcon: ({color, size}) => (
-                <AntDesignIcons name="adduser" size={30} color="black" />
-              ),
-              drawerLabelStyle: {
-                fontSize: 18,
-                color: 'black',
-              },
-              headerShown: false,
-            }}
-          />
-          <Drawer.Screen
-            name="Settings"
-            component={Settings}
-            options={{
-              drawerLabel: 'Settings',
-              drawerIcon: ({color, size}) => (
-                <AntDesignIcons name="setting" size={30} color="black" />
-              ),
-              drawerLabelStyle: {
-                fontSize: 18,
-                color: 'black',
-              },
-              headerShown: false,
-            }}
-          />
-        </Drawer.Navigator>
-      </SafeAreaView>
-    </NavigationContainer>
+    <UserContextProvider>
+      <NavigationContainer>
+        <SafeAreaView style={{flex: 1}}>
+          <Drawer.Navigator initialRouteName="Projects">
+            <Drawer.Screen
+              name="New Project"
+              component={NewProject}
+              options={{
+                drawerLabel: 'New Project',
+                drawerIcon: ({color, size}) => (
+                  <AntDesignIcons name="plus" size={30} color="black" />
+                ),
+                drawerLabelStyle: {
+                  fontSize: 18,
+                  color: 'black',
+                },
+                headerShown: false,
+              }}
+            />
+            <Drawer.Screen
+              name="Projects"
+              component={Projects}
+              options={{
+                drawerLabel: 'Projects',
+                drawerIcon: ({color, size}) => (
+                  <MaterialCommunityIcons
+                    name="bag-personal-outline"
+                    size={30}
+                    color="black"
+                  />
+                ),
+                drawerLabelStyle: {
+                  fontSize: 18,
+                  color: 'black',
+                },
+                headerShown: false,
+              }}
+            />
+            <Drawer.Screen
+              name="Project Managers"
+              component={ProjectManagers}
+              options={{
+                drawerLabel: 'Project Managers',
+                drawerIcon: ({color, size}) => (
+                  <AntDesignIcons name="user" size={30} color="black" />
+                ),
+                drawerLabelStyle: {
+                  fontSize: 18,
+                  color: 'black',
+                },
+                headerShown: false,
+              }}
+            />
+            <Drawer.Screen
+              name="Employees"
+              component={Employees}
+              options={{
+                drawerLabel: 'Employees',
+                drawerIcon: ({color, size}) => (
+                  <AntDesignIcons name="adduser" size={30} color="black" />
+                ),
+                drawerLabelStyle: {
+                  fontSize: 18,
+                  color: 'black',
+                },
+                headerShown: false,
+              }}
+            />
+            <Drawer.Screen
+              name="Settings"
+              component={Settings}
+              options={{
+                drawerLabel: 'Settings',
+                drawerIcon: ({color, size}) => (
+                  <AntDesignIcons name="setting" size={30} color="black" />
+                ),
+                drawerLabelStyle: {
+                  fontSize: 18,
+                  color: 'black',
+                },
+                headerShown: false,
+              }}
+            />
+          </Drawer.Navigator>
+        </SafeAreaView>
+      </NavigationContainer>
+    </UserContextProvider>
   );
 };
 

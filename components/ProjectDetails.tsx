@@ -8,7 +8,7 @@ import Files from './Files';
 
 const ProjectDetails = ({route}) => {
   const [activeTab, setActiveTab] = useState('projectOverview');
-  const {projectName} = route.params;
+  const {name: projectName} = route.params;
   return (
     <View>
       <Text style={styles.heading}>{projectName}</Text>

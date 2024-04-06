@@ -1,67 +1,14 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import TableCell from './TableCell';
-
-const projectListArray = [
-  {
-    projectName: 'Food on time1',
-    startedOn: '12 Feb 24',
-    status: 'On going',
-    projectManager: 'Dipa Majumdar',
-    members: 6,
-  },
-  {
-    projectName: 'Food on time2',
-    startedOn: '12 Feb 24',
-    status: 'Closed',
-    projectManager: 'Dipa Majumdar',
-    members: 6,
-  },
-  {
-    projectName: 'Food on time3',
-    startedOn: '12 Feb 24',
-    status: 'In progress',
-    projectManager: 'Dipa Majumdar',
-    members: 6,
-  },
-  {
-    projectName: 'Food on time4',
-    startedOn: '12 Feb 24',
-    status: 'On going',
-    projectManager: 'Dipa Majumdar',
-    members: 6,
-  },
-  {
-    projectName: 'Food on time5',
-    startedOn: '12 Feb 24',
-    status: 'On going',
-    projectManager: 'Dipa Majumdar',
-    members: 6,
-  },
-  {
-    projectName: 'Food on time6',
-    startedOn: '12 Feb 24',
-    status: 'Hold',
-    projectManager: 'Dipa Majumdar',
-    members: 6,
-  },
-  {
-    projectName: 'Food on time7',
-    startedOn: '12 Feb 24',
-    status: 'Hold',
-    projectManager: 'Dipa Majumdar',
-    members: 6,
-  },
-  {
-    projectName: 'Food on time8',
-    startedOn: '12 Feb 24',
-    status: 'Hold',
-    projectManager: 'Dipa Majumdar',
-    members: 6,
-  },
-];
+import UserContext from '../context/UserContext';
 
 const Table = ({statusType}) => {
+  const {projectsListData} = useContext(UserContext);
+  useEffect(() => {
+    console.log('hi');
+    console.log(projectsListData);
+  }, []);
   return (
     <View>
       {/* Table Header */}
@@ -78,34 +25,32 @@ const Table = ({statusType}) => {
         <View style={styles.cell}>
           <Text style={styles.cellText}>Project Manager</Text>
         </View>
-        <View style={styles.cell}>
+        {/* <View style={styles.cell}>
           <Text style={styles.cellText}>Members</Text>
-        </View>
+        </View> */}
       </View>
 
       <ScrollView>
         {statusType === 'all' &&
-          projectListArray.map(item => (
-            <TableCell key={item.projectName} {...item} />
-          ))}
+          projectsListData.map(item => <TableCell key={item.id} {...item} />)}
 
         {(statusType === 'On going' || statusType === 'In progress') &&
-          projectListArray
+          projectsListData
             .filter(
               item =>
-                item.status === 'On going' || item.status === 'In progress',
+                item.status === 'On-Going' || item.status === 'In progress',
             )
-            .map(item => <TableCell key={item.projectName} {...item} />)}
+            .map(item => <TableCell key={item.id} {...item} />)}
 
         {statusType === 'Closed' &&
-          projectListArray
+          projectsListData
             .filter(item => item.status === 'Closed')
-            .map(item => <TableCell key={item.projectName} {...item} />)}
+            .map(item => <TableCell key={item.id} {...item} />)}
 
         {statusType === 'Hold' &&
-          projectListArray
+          projectsListData
             .filter(item => item.status === 'Hold')
-            .map(item => <TableCell key={item.projectName} {...item} />)}
+            .map(item => <TableCell key={item.id} {...item} />)}
         <View style={{height: 150}}></View>
       </ScrollView>
     </View>

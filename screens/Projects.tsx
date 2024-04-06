@@ -1,5 +1,5 @@
 import {createStackNavigator} from '@react-navigation/stack';
-import React from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -12,6 +12,8 @@ import ProjectsList from '../components/ProjectsList';
 import ProjectDetails from '../components/ProjectDetails';
 import AntDesignIcons from 'react-native-vector-icons/AntDesign';
 import {useNavigation} from '@react-navigation/native';
+import UserContext from '../context/UserContext';
+import axios from 'axios';
 
 const searchIcons = <AntDesignIcons name="search1" size={30} color="grey" />;
 
@@ -36,6 +38,23 @@ const Projects = () => {
 
 const ProjectsScreen = () => {
   const navigation = useNavigation();
+  const {user, projectsListData, setProjectsListData} = useContext(UserContext);
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:8000/projects', {
+        params: {
+          role: user.role,
+          id: user.userId,
+        },
+      })
+      .then(response => {
+        console.log(response.data.data);
+        setProjectsListData(response.data.data);
+      })
+      .catch(error => console.log('Error in fetching projects list', error));
+  }, []);
+
   const openDrawer = () => {
     navigation.openDrawer();
   };
@@ -54,7 +73,7 @@ const ProjectsScreen = () => {
             source={require('../assets/profilepic.jpg')}
             style={{height: 55, width: 55, borderRadius: 50}}
           />
-          <Text style={{fontSize: 16}}>Auditor</Text>
+          <Text style={{fontSize: 16}}>{user?.role}</Text>
         </TouchableOpacity>
         <View style={styles.searchContainer}>
           <TextInput

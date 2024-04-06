@@ -3,15 +3,15 @@ import React from 'react';
 import {useNavigation} from '@react-navigation/native';
 
 const TableCell = ({
-  projectName,
-  startedOn,
+  name,
+  start_date,
   status,
-  projectManager,
-  members,
+  associated_manager,
+  members = 0,
 }) => {
   const getStatusCellColor = status => {
     switch (status) {
-      case 'On going':
+      case 'On-Going':
         return 'green';
       case 'In progress':
         return 'green';
@@ -28,13 +28,13 @@ const TableCell = ({
     <TouchableOpacity
       style={styles.row}
       onPress={() => {
-        navigation.navigate('ProjectDetails', {projectName});
+        navigation.navigate('ProjectDetails', {name});
       }}>
       <View style={styles.cell}>
-        <Text style={styles.cellText}>{projectName} </Text>
+        <Text style={styles.cellText}>{name} </Text>
       </View>
       <View style={styles.cell}>
-        <Text style={styles.cellText}>{startedOn} </Text>
+        <Text style={styles.cellText}>{start_date} </Text>
       </View>
       <View
         style={[
@@ -56,11 +56,11 @@ const TableCell = ({
         </Text>
       </View>
       <View style={styles.cell}>
-        <Text style={styles.cellText}>{projectManager} </Text>
+        <Text style={styles.cellText}>{associated_manager.name} </Text>
       </View>
-      <View style={styles.cell}>
+      {/* <View style={styles.cell}>
         <Text style={styles.cellText}>{members} </Text>
-      </View>
+      </View> */}
     </TouchableOpacity>
   );
 };
@@ -73,6 +73,7 @@ const styles = StyleSheet.create({
   cell: {
     flex: 1,
     padding: 8,
+    marginTop: 5,
   },
   cellText: {
     textAlign: 'center',
