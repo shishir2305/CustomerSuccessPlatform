@@ -47,7 +47,7 @@ const ProjectsList = () => {
 
       {activeTab === 'all' && <List statusType="all" />}
       {activeTab === 'inProgress' && <List statusType="In progress" />}
-      {activeTab === 'completed' && <List statusType="Closed" />}
+      {activeTab === 'completed' && <List statusType="Completed" />}
       {activeTab === 'onHold' && <List statusType="Hold" />}
     </View>
   );

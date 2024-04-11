@@ -8,10 +8,10 @@ import Files from './Files';
 
 const ProjectDetails = ({route}) => {
   const [activeTab, setActiveTab] = useState('projectOverview');
-  const {name: projectName} = route.params;
+  const [projectDetails, setProjectDetails] = useState(route.params);
   return (
     <View>
-      <Text style={styles.heading}>{projectName}</Text>
+      <Text style={styles.heading}>{projectDetails.name}</Text>
       <ScrollView
         horizontal={true}
         showsVerticalScrollIndicator={false}
@@ -71,10 +71,18 @@ const ProjectDetails = ({route}) => {
         </View>
       </ScrollView>
       {activeTab === 'projectOverview' && (
-        <ProjectOverview setActiveTab={setActiveTab} />
+        <ProjectOverview
+          setActiveTab={setActiveTab}
+          projectDetails={projectDetails}
+          setProjectDetails={setProjectDetails}
+        />
       )}
       {activeTab === 'scopeAndStack' && (
-        <ScopeAndStack setActiveTab={setActiveTab} />
+        <ScopeAndStack
+          setActiveTab={setActiveTab}
+          projectDetails={projectDetails}
+          setProjectDetails={setProjectDetails}
+        />
       )}
       {activeTab === 'escalationMatrix' && (
         <EscalationMatrix setActiveTab={setActiveTab} />

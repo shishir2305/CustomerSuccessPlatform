@@ -5,13 +5,23 @@ import AntDesignIcons from 'react-native-vector-icons/AntDesign';
 import {useNavigation} from '@react-navigation/native';
 import axios from 'axios';
 import UserContext from '../context/UserContext';
+import uuid from 'react-native-uuid';
 
 const backIcon = <AntDesignIcons name="arrowleft" size={30} color="black" />;
 
 const SelectProjectManager = () => {
   const navigation = useNavigation();
+  const {
+    user,
+    projectData,
+    setProjectData,
+    projectsListData,
+    setProjectsListData,
+    addingUserToggle,
+    setAddingUserToggle,
+  } = useContext(UserContext);
 
-  const {user} = useContext(UserContext);
+  // const {user} = useContext(UserContext);
 
   const [items, setItems] = useState([]);
 
@@ -26,11 +36,9 @@ const SelectProjectManager = () => {
         },
       })
       .then(response => {
-        console.log(response.data[0].name);
-
         const formattedManagers = response.data.map(element => ({
           label: element.name,
-          value: element.name,
+          value: element.user_id,
         }));
 
         setItems(formattedManagers);
@@ -40,10 +48,38 @@ const SelectProjectManager = () => {
       .catch(error => {
         console.log("Error in fetching manager's list", error);
       });
-  }, [user]);
+  }, []);
 
   const [isOpen, setIsOpen] = useState(false);
   const [currentValue, setCurrentValue] = useState('');
+
+  async function addProject() {
+    try {
+      const response = await axios.post(
+        'http://localhost:8000/addProject',
+        projectData,
+      );
+      console.log(response.data);
+      setProjectData({
+        _id: '',
+        name: '',
+        associated_manager: {
+          _id: '',
+          name: '',
+          designation: 'Manager',
+        },
+        status: 'On-Going',
+        start_date: '2024-4-10',
+      });
+
+      setAddingUserToggle(prevVal => !prevVal);
+
+      navigation.navigate('Projects');
+    } catch (error) {
+      console.error('Error adding project:', error);
+      throw error;
+    }
+  }
 
   const handleBack = () => {
     navigation.goBack();
@@ -58,17 +94,29 @@ const SelectProjectManager = () => {
       <DropDownPicker
         items={items}
         open={isOpen}
-        setOpen={() => setIsOpen(!isOpen)}
+        setOpen={setIsOpen}
         value={currentValue}
-        setValue={val => setCurrentValue(val)}
+        setValue={setCurrentValue}
         placeholder="Select Project Manager"
         textStyle={{fontSize: 18}}
+        onChangeValue={value => {
+          const selectedManager = projectManagersList.find(
+            manager => manager.user_id === value,
+          );
+          setProjectData({
+            ...projectData,
+            associated_manager: {
+              _id: selectedManager?.user_id,
+              name: selectedManager?.name,
+              designation: 'Manager',
+            },
+          });
+        }}
       />
+
       <TouchableOpacity
         style={[styles.button, isOpen && {marginTop: 150}]}
-        onPress={() => {
-          navigation.navigate('Projects');
-        }}>
+        onPress={addProject}>
         <Text style={styles.buttonText}>Continue</Text>
       </TouchableOpacity>
     </View>

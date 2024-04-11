@@ -5,8 +5,10 @@ import {
   TouchableOpacity,
   TextInput,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import DropDownPicker from 'react-native-dropdown-picker';
+import axios from 'axios';
+import UserContext from '../context/UserContext';
 
 const items = [
   {
@@ -14,13 +16,35 @@ const items = [
     value: 'backend',
   },
   {label: 'Frontend', value: 'frontend'},
-  {label: 'Mobile App', value: 'mobileApp'},
+  {label: 'Mobile-App', value: 'mobile_app'},
   {label: 'Database', value: 'database'},
 ];
 
-const ScopeAndStack = ({setActiveTab}) => {
+const ScopeAndStack = props => {
+  const {addingUserToggle, setAddingUserToggle} = useContext(UserContext);
+
   const [isOpen, setIsOpen] = useState(false);
-  const [currentValue, setCurrentValue] = useState([]);
+  const [currentValue, setCurrentValue] = useState(
+    props.projectDetails.stack.value,
+  );
+  // const [selectedItem, setSelectedItem] = useState(props.projectDetails.stack);
+
+  const handleUpdate = async () => {
+    try {
+      const response = await axios.post(
+        `http://localhost:8000/project/${props.projectDetails._id}/project_details`,
+        {
+          projectDetails: props.projectDetails,
+        },
+      );
+
+      console.log(response.data);
+
+      setAddingUserToggle(!addingUserToggle);
+    } catch (error) {
+      console.log('Error in updating project', error);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -31,25 +55,38 @@ const ScopeAndStack = ({setActiveTab}) => {
           open={isOpen}
           setOpen={() => setIsOpen(!isOpen)}
           value={currentValue}
-          setValue={val => setCurrentValue(val)}
+          setValue={value => {
+            setCurrentValue(value);
+          }}
           placeholder="Select Project Technology's"
-          multiple={true}
           mode="BADGE"
           showTickIcon={false}
+          textStyle={{fontSize: 20}}
+          onChangeValue={value => {
+            const selectedItem = items.find(item => {
+              return item.value === value;
+            });
+            props.setProjectDetails({
+              ...props.projectDetails,
+              stack: selectedItem,
+            });
+          }}
         />
       </View>
       <View style={[styles.inputContainer, isOpen && {marginTop: 150}]}>
         <Text style={styles.inputLabel}>Project Scope</Text>
         <TextInput
-          placeholder="Write here"
+          value={props.projectDetails.scope}
           style={[styles.input, styles.inputMedium]}
+          multiline={true}
+          textAlignVertical="top"
+          placeholder="Write here"
+          onChangeText={text => {
+            props.setProjectDetails({...props.projectDetails, scope: text});
+          }}
         />
       </View>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-          setActiveTab('escalationMatrix');
-        }}>
+      <TouchableOpacity style={styles.button} onPress={handleUpdate}>
         <Text style={styles.buttonText}>Continue</Text>
       </TouchableOpacity>
     </View>
@@ -80,6 +117,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     paddingHorizontal: 10,
     borderRadius: 5,
+    fontSize: 20,
   },
   inputMedium: {
     height: 100,

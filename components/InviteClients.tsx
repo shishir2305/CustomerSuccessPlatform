@@ -14,7 +14,7 @@ const backIcon = <AntDesignIcons name="arrowleft" size={30} color="black" />;
 const addIcon = <AntDesignIcons name="plus" size={30} color="black" />;
 const deleteIcon = <AntDesignIcons name="close" size={20} color="black" />;
 
-const InviteClients = () => {
+const InviteClients = ({route}) => {
   const navigation = useNavigation();
   const [clientInfo, setClientInfo] = useState({name: '', email: ''});
   const [emailsList, setEmailsList] = useState([]);

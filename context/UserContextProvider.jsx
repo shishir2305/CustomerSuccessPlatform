@@ -8,12 +8,30 @@ function UserContextProvider({children}) {
     roleId: 'rol_qLO42FIvSNsdZEO4',
   });
 
+  const [addingUserToggle, setAddingUserToggle] = useState(true);
+
   const [projectsListData, setProjectsListData] = useState([]);
+
+  const [projectData, setProjectData] = useState({
+    _id: '',
+    name: '',
+    associated_manager: {
+      _id: '',
+      name: '',
+      designation: 'Manager',
+    },
+    status: 'On-Going',
+    start_date: '2024-4-9',
+  });
 
   const contextValue = {
     user: user,
     projectsListData: projectsListData,
     setProjectsListData: setProjectsListData,
+    projectData: projectData,
+    setProjectData: setProjectData,
+    addingUserToggle: addingUserToggle,
+    setAddingUserToggle: setAddingUserToggle,
   };
 
   return (

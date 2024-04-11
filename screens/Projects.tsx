@@ -38,7 +38,8 @@ const Projects = () => {
 
 const ProjectsScreen = () => {
   const navigation = useNavigation();
-  const {user, projectsListData, setProjectsListData} = useContext(UserContext);
+  const {user, projectsListData, setProjectsListData, addingUserToggle} =
+    useContext(UserContext);
 
   useEffect(() => {
     axios
@@ -53,7 +54,7 @@ const ProjectsScreen = () => {
         setProjectsListData(response.data.data);
       })
       .catch(error => console.log('Error in fetching projects list', error));
-  }, []);
+  }, [addingUserToggle]);
 
   const openDrawer = () => {
     navigation.openDrawer();
@@ -86,22 +87,37 @@ const ProjectsScreen = () => {
       </View>
       <View style={styles.boxContainer}>
         <View style={styles.box}>
-          <Text style={styles.boxHeading}>41</Text>
+          <Text style={styles.boxHeading}>{projectsListData.length}</Text>
           <Text style={styles.boxContent}>All Projects</Text>
         </View>
 
         <View style={styles.box}>
-          <Text style={styles.boxHeading}>24</Text>
+          <Text style={styles.boxHeading}>
+            {
+              projectsListData.filter(project => project.status === 'On-Going')
+                .length
+            }
+          </Text>
           <Text style={styles.boxContent}>In Progress</Text>
         </View>
 
         <View style={styles.box}>
-          <Text style={styles.boxHeading}>12</Text>
+          <Text style={styles.boxHeading}>
+            {
+              projectsListData.filter(project => project.status === 'Completed')
+                .length
+            }
+          </Text>
           <Text style={styles.boxContent}>Completed</Text>
         </View>
 
         <View style={styles.box}>
-          <Text style={styles.boxHeading}>5</Text>
+          <Text style={styles.boxHeading}>
+            {
+              projectsListData.filter(project => project.status === 'Hold')
+                .length
+            }
+          </Text>
           <Text style={styles.boxContent}>Hold</Text>
         </View>
       </View>

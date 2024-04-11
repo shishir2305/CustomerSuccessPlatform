@@ -8,23 +8,32 @@ import {
 } from 'react-native';
 import React from 'react';
 
-const ProjectOverview = ({setActiveTab}) => {
+const ProjectOverview = props => {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.inputContainer}>
         <Text style={styles.inputLabel}>Project Name</Text>
-        <TextInput placeholder="Enter name" style={styles.input} />
+        <TextInput value={props.projectDetails.name} style={styles.input} />
       </View>
 
       <View style={styles.inputContainer}>
         <Text style={styles.inputLabel}>Project Brief</Text>
-        <TextInput style={[styles.input, styles.inputLarge]} />
+        <TextInput
+          style={[styles.input, styles.inputLarge]}
+          value={props.projectDetails.overview}
+          multiline={true}
+          textAlignVertical="top"
+          placeholder="Write here"
+          onChangeText={text => {
+            props.setProjectDetails({...props.projectDetails, overview: text});
+          }}
+        />
       </View>
 
       <View style={styles.inputContainer}>
         <Text style={styles.inputLabel}>Purpose</Text>
         <TextInput
-          placeholder="Enter name"
+          placeholder="Write here"
           style={[styles.input, styles.inputMedium]}
         />
       </View>
@@ -32,7 +41,7 @@ const ProjectOverview = ({setActiveTab}) => {
       <View style={styles.inputContainer}>
         <Text style={styles.inputLabel}>Goals</Text>
         <TextInput
-          placeholder="Enter name"
+          placeholder="Write here"
           style={[styles.input, styles.inputMedium]}
         />
       </View>
@@ -40,7 +49,7 @@ const ProjectOverview = ({setActiveTab}) => {
       <View style={styles.inputContainer}>
         <Text style={styles.inputLabel}>Objectives</Text>
         <TextInput
-          placeholder="Enter name"
+          placeholder="Write here"
           style={[styles.input, styles.inputMedium]}
         />
       </View>
@@ -55,8 +64,18 @@ const ProjectOverview = ({setActiveTab}) => {
             alignItems: 'center',
           }}>
           <TextInput
-            placeholder="Enter budget"
+            value={props.projectDetails.budget.type_value}
             style={[styles.input, {width: '80%'}]}
+            onChangeText={text => {
+              props.setProjectDetails({
+                ...props.projectDetails,
+                budget: {
+                  ...props.projectDetails.budget,
+                  type_value: text,
+                  type: 'Monthly',
+                },
+              });
+            }}
           />
           <Text style={{fontSize: 35}}>$</Text>
         </View>
@@ -65,7 +84,8 @@ const ProjectOverview = ({setActiveTab}) => {
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          setActiveTab('scopeAndStack');
+          // console.log(props.projectDetails);
+          props.setActiveTab('scopeAndStack');
         }}>
         <Text style={styles.buttonText}>Continue</Text>
       </TouchableOpacity>
@@ -99,6 +119,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     paddingHorizontal: 10,
     borderRadius: 5,
+    fontSize: 20,
   },
   inputLarge: {
     height: 200,

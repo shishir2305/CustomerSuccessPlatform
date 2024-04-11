@@ -2,13 +2,7 @@ import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
 
-const TableCell = ({
-  name,
-  start_date,
-  status,
-  associated_manager,
-  members = 0,
-}) => {
+const TableCell = props => {
   const getStatusCellColor = status => {
     switch (status) {
       case 'On-Going':
@@ -19,6 +13,10 @@ const TableCell = ({
         return 'black';
       case 'Closed':
         return 'red';
+      case 'Completed':
+        return 'red';
+      default:
+        return 'black';
     }
   };
 
@@ -28,19 +26,19 @@ const TableCell = ({
     <TouchableOpacity
       style={styles.row}
       onPress={() => {
-        navigation.navigate('ProjectDetails', {name});
+        navigation.navigate('ProjectDetails', props);
       }}>
       <View style={styles.cell}>
-        <Text style={styles.cellText}>{name} </Text>
+        <Text style={styles.cellText}>{props.name} </Text>
       </View>
       <View style={styles.cell}>
-        <Text style={styles.cellText}>{start_date} </Text>
+        <Text style={styles.cellText}>{props.start_date} </Text>
       </View>
       <View
         style={[
           styles.cell,
           {
-            backgroundColor: getStatusCellColor(status),
+            backgroundColor: getStatusCellColor(props.status),
             borderRadius: 5,
             paddingVertical: 10,
           },
@@ -52,14 +50,14 @@ const TableCell = ({
               color: 'white',
             },
           ]}>
-          {status}
+          {props.status}
         </Text>
       </View>
       <View style={styles.cell}>
-        <Text style={styles.cellText}>{associated_manager.name} </Text>
+        <Text style={styles.cellText}>{props.associated_manager.name} </Text>
       </View>
       {/* <View style={styles.cell}>
-        <Text style={styles.cellText}>{members} </Text>
+        <Text style={styles.cellText}>{props.members} </Text>
       </View> */}
     </TouchableOpacity>
   );

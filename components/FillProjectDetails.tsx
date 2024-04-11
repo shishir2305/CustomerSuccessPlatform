@@ -6,9 +6,13 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import React from 'react';
+import React, {useContext, useEffect, useState} from 'react';
+import uuid from 'react-native-uuid';
+import UserContext from '../context/UserContext';
 
 const FillProjectDetails = ({navigation}) => {
+  const {projectData, setProjectData} = useContext(UserContext);
+
   return (
     <ScrollView
       contentContainerStyle={styles.container}
@@ -17,7 +21,12 @@ const FillProjectDetails = ({navigation}) => {
 
       <View style={styles.inputContainer}>
         <Text style={styles.inputLabel}>Project Name</Text>
-        <TextInput placeholder="Enter name" style={styles.input} />
+        <TextInput
+          placeholder="Enter name"
+          style={styles.input}
+          value={projectData.name}
+          onChangeText={text => setProjectData({...projectData, name: text})}
+        />
       </View>
 
       <View style={styles.inputContainer}>
@@ -25,6 +34,8 @@ const FillProjectDetails = ({navigation}) => {
         <TextInput
           style={[styles.input, styles.inputLarge]}
           placeholder="Write here"
+          multiline={true}
+          textAlignVertical="top"
         />
       </View>
 
@@ -33,6 +44,8 @@ const FillProjectDetails = ({navigation}) => {
         <TextInput
           placeholder="Write here"
           style={[styles.input, styles.inputMedium]}
+          multiline={true}
+          textAlignVertical="top"
         />
       </View>
 
@@ -41,6 +54,8 @@ const FillProjectDetails = ({navigation}) => {
         <TextInput
           placeholder="Write here"
           style={[styles.input, styles.inputMedium]}
+          multiline={true}
+          textAlignVertical="top"
         />
       </View>
 
@@ -49,6 +64,8 @@ const FillProjectDetails = ({navigation}) => {
         <TextInput
           placeholder="Write here"
           style={[styles.input, styles.inputMedium]}
+          multiline={true}
+          textAlignVertical="top"
         />
       </View>
 
@@ -72,6 +89,10 @@ const FillProjectDetails = ({navigation}) => {
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
+          setProjectData({
+            ...projectData,
+            _id: uuid.v4(),
+          });
           navigation.navigate('InviteClients');
         }}>
         <Text style={styles.buttonText}>Continue</Text>
@@ -107,7 +128,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     paddingHorizontal: 10,
     borderRadius: 5,
-    fontSize: 18,
+    fontSize: 20,
   },
   inputLarge: {
     height: 200,

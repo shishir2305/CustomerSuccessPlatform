@@ -14,7 +14,7 @@ const Table = ({statusType}) => {
       {/* Table Header */}
       <View style={[styles.row, styles.header]}>
         <View style={styles.cell}>
-          <Text style={styles.cellText}>Project Name</Text>
+          <Text style={styles.cellText}>Name</Text>
         </View>
         <View style={styles.cell}>
           <Text style={styles.cellText}>Started On</Text>
@@ -23,7 +23,7 @@ const Table = ({statusType}) => {
           <Text style={styles.cellText}>Status</Text>
         </View>
         <View style={styles.cell}>
-          <Text style={styles.cellText}>Project Manager</Text>
+          <Text style={styles.cellText}>Manager</Text>
         </View>
         {/* <View style={styles.cell}>
           <Text style={styles.cellText}>Members</Text>
@@ -32,7 +32,7 @@ const Table = ({statusType}) => {
 
       <ScrollView>
         {statusType === 'all' &&
-          projectsListData.map(item => <TableCell key={item.id} {...item} />)}
+          projectsListData.map(item => <TableCell key={item._id} {...item} />)}
 
         {(statusType === 'On going' || statusType === 'In progress') &&
           projectsListData
@@ -40,17 +40,17 @@ const Table = ({statusType}) => {
               item =>
                 item.status === 'On-Going' || item.status === 'In progress',
             )
-            .map(item => <TableCell key={item.id} {...item} />)}
+            .map(item => <TableCell key={item._id} {...item} />)}
 
-        {statusType === 'Closed' &&
+        {statusType === 'Completed' &&
           projectsListData
-            .filter(item => item.status === 'Closed')
-            .map(item => <TableCell key={item.id} {...item} />)}
+            .filter(item => item.status === 'Completed')
+            .map(item => <TableCell key={item._id} {...item} />)}
 
         {statusType === 'Hold' &&
           projectsListData
             .filter(item => item.status === 'Hold')
-            .map(item => <TableCell key={item.id} {...item} />)}
+            .map(item => <TableCell key={item._id} {...item} />)}
         <View style={{height: 150}}></View>
       </ScrollView>
     </View>
@@ -63,6 +63,7 @@ const styles = StyleSheet.create({
   },
   header: {
     backgroundColor: 'lightgray',
+    paddingVertical: 10,
   },
   cell: {
     flex: 1,
