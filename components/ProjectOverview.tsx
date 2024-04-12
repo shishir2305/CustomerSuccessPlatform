@@ -6,14 +6,26 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
-import React from 'react';
+import React, {useContext} from 'react';
+import UserContext from '../context/UserContext';
 
 const ProjectOverview = props => {
+  const {user} = useContext(UserContext);
+  const disableFields = () => {
+    return user.role === 'Client' || user.role === 'Auditor';
+  };
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.inputContainer}>
         <Text style={styles.inputLabel}>Project Name</Text>
-        <TextInput value={props.projectDetails.name} style={styles.input} />
+        <TextInput
+          value={props.projectDetails.name}
+          style={styles.input}
+          onChangeText={text => {
+            props.setProjectDetails({...props.projectDetails, name: text});
+          }}
+          editable={!disableFields()}
+        />
       </View>
 
       <View style={styles.inputContainer}>
@@ -27,6 +39,7 @@ const ProjectOverview = props => {
           onChangeText={text => {
             props.setProjectDetails({...props.projectDetails, overview: text});
           }}
+          editable={!disableFields()}
         />
       </View>
 
@@ -35,6 +48,7 @@ const ProjectOverview = props => {
         <TextInput
           placeholder="Write here"
           style={[styles.input, styles.inputMedium]}
+          editable={!disableFields()}
         />
       </View>
 
@@ -43,6 +57,7 @@ const ProjectOverview = props => {
         <TextInput
           placeholder="Write here"
           style={[styles.input, styles.inputMedium]}
+          editable={!disableFields()}
         />
       </View>
 
@@ -51,6 +66,7 @@ const ProjectOverview = props => {
         <TextInput
           placeholder="Write here"
           style={[styles.input, styles.inputMedium]}
+          editable={!disableFields()}
         />
       </View>
 
@@ -76,6 +92,7 @@ const ProjectOverview = props => {
                 },
               });
             }}
+            editable={!disableFields()}
           />
           <Text style={{fontSize: 35}}>$</Text>
         </View>

@@ -21,28 +21,33 @@ const items = [
 ];
 
 const ScopeAndStack = props => {
-  const {addingUserToggle, setAddingUserToggle} = useContext(UserContext);
+  const {user, addingUserToggle, setAddingUserToggle} = useContext(UserContext);
 
   const [isOpen, setIsOpen] = useState(false);
   const [currentValue, setCurrentValue] = useState(
     props.projectDetails.stack.value,
   );
-  // const [selectedItem, setSelectedItem] = useState(props.projectDetails.stack);
+
+  const disableFields = () => {
+    return user.role === 'Client' || user.role === 'Auditor';
+  };
 
   const handleUpdate = async () => {
-    try {
-      const response = await axios.post(
-        `http://localhost:8000/project/${props.projectDetails._id}/project_details`,
-        {
-          projectDetails: props.projectDetails,
-        },
-      );
+    if (user.role === 'Admin' || user.role === 'Manager') {
+      try {
+        const response = await axios.post(
+          `http://localhost:8000/project/${props.projectDetails._id}/project_details`,
+          {
+            projectDetails: props.projectDetails,
+          },
+        );
 
-      console.log(response.data);
+        console.log(response.data);
 
-      setAddingUserToggle(!addingUserToggle);
-    } catch (error) {
-      console.log('Error in updating project', error);
+        setAddingUserToggle(!addingUserToggle);
+      } catch (error) {
+        console.log('Error in updating project', error);
+      }
     }
   };
 
@@ -71,6 +76,7 @@ const ScopeAndStack = props => {
               stack: selectedItem,
             });
           }}
+          disabled={disableFields()}
         />
       </View>
       <View style={[styles.inputContainer, isOpen && {marginTop: 150}]}>
@@ -84,6 +90,7 @@ const ScopeAndStack = props => {
           onChangeText={text => {
             props.setProjectDetails({...props.projectDetails, scope: text});
           }}
+          editable={!disableFields()}
         />
       </View>
       <TouchableOpacity style={styles.button} onPress={handleUpdate}>
