@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import UserContext from './UserContext';
+import getCurrentDate from '../utils/currentDate';
 
 function UserContextProvider({children}) {
   const [user, setUser] = useState({
@@ -21,7 +22,7 @@ function UserContextProvider({children}) {
       designation: 'Manager',
     },
     status: 'On-Going',
-    start_date: '2024-4-9',
+    start_date: getCurrentDate(),
   });
 
   const contextValue = {

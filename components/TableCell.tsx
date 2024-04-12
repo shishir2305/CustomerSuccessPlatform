@@ -1,22 +1,21 @@
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import React from 'react';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import AntDesignIcons from 'react-native-vector-icons/AntDesign';
 
 const TableCell = props => {
   const getStatusCellColor = status => {
     switch (status) {
       case 'On-Going':
-        return 'green';
       case 'In progress':
-        return 'green';
+        return '#4CAF50'; // Green
       case 'Hold':
-        return 'black';
+        return '#555'; // Amber
       case 'Closed':
-        return 'red';
       case 'Completed':
-        return 'red';
+        return '#F44336'; // Red
       default:
-        return 'black';
+        return '#9E9E9E'; // Grey
     }
   };
 
@@ -24,57 +23,87 @@ const TableCell = props => {
 
   return (
     <TouchableOpacity
-      style={styles.row}
       onPress={() => {
         navigation.navigate('ProjectDetails', props);
-      }}>
-      <View style={styles.cell}>
-        <Text style={styles.cellText}>{props.name} </Text>
-      </View>
-      <View style={styles.cell}>
-        <Text style={styles.cellText}>{props.start_date} </Text>
-      </View>
-      <View
-        style={[
-          styles.cell,
-          {
-            backgroundColor: getStatusCellColor(props.status),
-            borderRadius: 5,
-            paddingVertical: 10,
-          },
-        ]}>
-        <Text
+      }}
+      style={styles.container}>
+      <View style={styles.card}>
+        <View style={styles.infoColumn}>
+          <Text style={styles.title}>{props.name}</Text>
+          <View style={styles.managerRow}>
+            <AntDesignIcons name="user" size={16} color="#555" />
+            <Text style={styles.subTitle}>
+              Manager: {props.associated_manager.name}
+            </Text>
+          </View>
+          <View style={styles.dateRow}>
+            <AntDesignIcons name="calendar" size={16} color="#555" />
+            <Text style={styles.subTitle}>Start Date: {props.start_date}</Text>
+          </View>
+        </View>
+        <View
           style={[
-            styles.cellText,
-            {
-              color: 'white',
-            },
+            styles.statusColumn,
+            {backgroundColor: getStatusCellColor(props.status)},
           ]}>
-          {props.status}
-        </Text>
+          <Text style={styles.status}>{props.status}</Text>
+        </View>
       </View>
-      <View style={styles.cell}>
-        <Text style={styles.cellText}>{props.associated_manager.name} </Text>
-      </View>
-      {/* <View style={styles.cell}>
-        <Text style={styles.cellText}>{props.members} </Text>
-      </View> */}
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
-  row: {
+  container: {
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    // backgroundColor: '#FFFFFF',
+    backgroundColor: '#F5F5F5',
+    marginBottom: 16,
+    borderRadius: 8,
+    elevation: 3,
+    shadowColor: '#000000',
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+    shadowOffset: {width: 0, height: 2},
+  },
+  card: {
     flexDirection: 'row',
     alignItems: 'center',
   },
-  cell: {
+  infoColumn: {
     flex: 1,
-    padding: 8,
-    marginTop: 5,
   },
-  cellText: {
-    textAlign: 'center',
+  managerRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 8,
+  },
+  dateRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 4,
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#333',
+  },
+  subTitle: {
+    fontSize: 16,
+    // color: '#555',
+    color: '#777',
+    marginLeft: 4,
+  },
+  statusColumn: {
+    paddingHorizontal: 16,
+    paddingVertical: 9,
+    borderRadius: 20,
+  },
+  status: {
+    color: 'white',
+    fontWeight: 'bold',
+    textTransform: 'uppercase',
   },
 });
 

@@ -6,6 +6,8 @@ import {useNavigation} from '@react-navigation/native';
 import axios from 'axios';
 import UserContext from '../context/UserContext';
 import uuid from 'react-native-uuid';
+import getCurrentDate from '../utils/currentDate';
+getCurrentDate;
 
 const backIcon = <AntDesignIcons name="arrowleft" size={30} color="black" />;
 
@@ -21,14 +23,19 @@ const SelectProjectManager = () => {
     setAddingUserToggle,
   } = useContext(UserContext);
 
-  // const {user} = useContext(UserContext);
-
   const [items, setItems] = useState([]);
 
   const [projectManagersList, setProjectManagersList] = useState([]);
 
+  const getCurrentDate = () => {
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+    const day = String(currentDate.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
   useEffect(() => {
-    console.log(user);
     axios
       .get('http://localhost:8000/getManagers', {
         params: {
@@ -69,7 +76,7 @@ const SelectProjectManager = () => {
           designation: 'Manager',
         },
         status: 'On-Going',
-        start_date: '2024-4-10',
+        start_date: getCurrentDate(),
       });
 
       setAddingUserToggle(prevVal => !prevVal);

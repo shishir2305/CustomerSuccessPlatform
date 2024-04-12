@@ -11,25 +11,6 @@ const Table = ({statusType}) => {
   }, []);
   return (
     <View>
-      {/* Table Header */}
-      <View style={[styles.row, styles.header]}>
-        <View style={styles.cell}>
-          <Text style={styles.cellText}>Name</Text>
-        </View>
-        <View style={styles.cell}>
-          <Text style={styles.cellText}>Started On</Text>
-        </View>
-        <View style={styles.cell}>
-          <Text style={styles.cellText}>Status</Text>
-        </View>
-        <View style={styles.cell}>
-          <Text style={styles.cellText}>Manager</Text>
-        </View>
-        {/* <View style={styles.cell}>
-          <Text style={styles.cellText}>Members</Text>
-        </View> */}
-      </View>
-
       <ScrollView>
         {statusType === 'all' &&
           projectsListData.map(item => <TableCell key={item._id} {...item} />)}

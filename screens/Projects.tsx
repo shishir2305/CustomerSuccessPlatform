@@ -135,11 +135,11 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   boxContainer: {
-    height: '30%',
+    height: '28%',
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 15,
+    gap: 12,
     justifyContent: 'center',
     paddingVertical: 10,
     marginBottom: 5,
@@ -157,12 +157,14 @@ const styles = StyleSheet.create({
   boxHeading: {
     fontSize: 30,
     fontWeight: 'bold',
+    color: '#555',
   },
   boxContent: {
     fontSize: 18,
+    color: '#555',
   },
   projectsListContainer: {
-    height: '70%',
+    height: '72%',
   },
   header: {
     display: 'flex',
