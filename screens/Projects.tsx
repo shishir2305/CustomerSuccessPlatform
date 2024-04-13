@@ -1,5 +1,5 @@
 import {createStackNavigator} from '@react-navigation/stack';
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {
   View,
   Text,
@@ -11,11 +11,13 @@ import {
 import ProjectsList from '../components/ProjectsList';
 import ProjectDetails from '../components/ProjectDetails';
 import AntDesignIcons from 'react-native-vector-icons/AntDesign';
+import FeatherIcons from 'react-native-vector-icons/Feather';
 import {useNavigation} from '@react-navigation/native';
 import UserContext from '../context/UserContext';
 import axios from 'axios';
 
 const searchIcons = <AntDesignIcons name="search1" size={30} color="grey" />;
+const menuIcon = <FeatherIcons name="menu" size={30} />;
 
 const Stack = createStackNavigator();
 
@@ -30,7 +32,7 @@ const Projects = () => {
       <Stack.Screen
         name="ProjectDetails"
         component={ProjectDetails}
-        // options={{headerShown: false}}
+        options={{headerShown: false}}
       />
     </Stack.Navigator>
   );
@@ -42,6 +44,7 @@ const ProjectsScreen = () => {
     useContext(UserContext);
 
   useEffect(() => {
+    console.log('Updated');
     axios
       .get('http://localhost:8000/projects', {
         params: {
@@ -70,11 +73,7 @@ const ProjectsScreen = () => {
             gap: 5,
           }}
           onPress={openDrawer}>
-          <Image
-            source={require('../assets/profilepic.jpg')}
-            style={{height: 55, width: 55, borderRadius: 50}}
-          />
-          <Text style={{fontSize: 16}}>{user?.role}</Text>
+          {menuIcon}
         </TouchableOpacity>
         <View style={styles.searchContainer}>
           <TextInput
@@ -84,6 +83,21 @@ const ProjectsScreen = () => {
           />
           {searchIcons}
         </View>
+        <TouchableOpacity
+          style={{
+            borderRadius: 50,
+            display: 'flex',
+            alignItems: 'center',
+            gap: 5,
+          }}>
+          <Image
+            source={require('../assets/profilepic.jpg')}
+            style={{height: 55, width: 55, borderRadius: 50}}
+          />
+          <Text style={{fontSize: 16, fontWeight: 'bold', color: '#555'}}>
+            {user?.role}
+          </Text>
+        </TouchableOpacity>
       </View>
       <View style={styles.boxContainer}>
         <View style={styles.box}>
@@ -132,7 +146,8 @@ const ProjectsScreen = () => {
 const styles = StyleSheet.create({
   container: {
     height: '100%',
-    padding: 10,
+    paddingHorizontal: 10,
+    backgroundColor: 'white',
   },
   boxContainer: {
     height: '28%',
@@ -147,7 +162,7 @@ const styles = StyleSheet.create({
   box: {
     height: '49%',
     width: '47%',
-    backgroundColor: '#E0E5EB',
+    backgroundColor: '#E8E8E8',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -176,8 +191,8 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    width: '80%',
-    backgroundColor: '#fff',
+    width: '70%',
+    backgroundColor: '#F5F5F5',
     borderRadius: 5,
   },
   searchInput: {

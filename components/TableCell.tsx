@@ -57,8 +57,7 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 16,
     paddingVertical: 12,
-    // backgroundColor: '#FFFFFF',
-    backgroundColor: '#F5F5F5',
+    backgroundColor: '#FFFFFF',
     marginBottom: 16,
     borderRadius: 8,
     elevation: 3,
@@ -91,8 +90,7 @@ const styles = StyleSheet.create({
   },
   subTitle: {
     fontSize: 16,
-    // color: '#555',
-    color: '#777',
+    color: '#555',
     marginLeft: 4,
   },
   statusColumn: {

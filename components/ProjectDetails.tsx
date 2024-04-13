@@ -1,17 +1,38 @@
-import {View, Text, StyleSheet, Button, ScrollView} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Button,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 import React, {useState} from 'react';
 import ProjectOverview from './ProjectOverview';
 import ScopeAndStack from './ScopeAndStack';
 import EscalationMatrix from './EscalationMatrix';
 import VersionHistory from './VersionHistory';
 import Files from './Files';
+import AntDesignIcons from 'react-native-vector-icons/AntDesign';
 
-const ProjectDetails = ({route}) => {
+const backIcon = <AntDesignIcons name="arrowleft" size={30} color="black" />;
+
+const ProjectDetails = ({route, navigation}) => {
   const [activeTab, setActiveTab] = useState('projectOverview');
   const [projectDetails, setProjectDetails] = useState(route.params);
+
+  const handleBack = () => {
+    navigation.goBack();
+  };
+
   return (
-    <View>
-      <Text style={styles.heading}>{projectDetails.name}</Text>
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <TouchableOpacity style={{marginLeft: 10}} onPress={handleBack}>
+          {backIcon}
+        </TouchableOpacity>
+        <Text style={styles.heading}>{projectDetails.name}</Text>
+        <View style={styles.emptyIcon}></View>
+      </View>
       <ScrollView
         horizontal={true}
         showsVerticalScrollIndicator={false}
@@ -96,14 +117,24 @@ const ProjectDetails = ({route}) => {
 };
 
 const styles = StyleSheet.create({
-  heading: {
-    fontSize: 25,
-    fontWeight: '500',
-    textAlign: 'center',
-    marginTop: 15,
-  },
   container: {
     padding: 10,
+    backgroundColor: 'white',
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  heading: {
+    fontSize: 25,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: '#333333',
+  },
+  emptyIcon: {
+    width: 40,
   },
   tabSwitcher: {
     display: 'flex',

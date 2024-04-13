@@ -1,37 +1,40 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import TableCell from './TableCell';
 import UserContext from '../context/UserContext';
 
 const Table = ({statusType}) => {
-  const {projectsListData} = useContext(UserContext);
+  const {projectsListData, addingUserToggle, setAddingUserToggle} =
+    useContext(UserContext);
+  const [filteredProjects, setFilteredProjects] = useState([]);
+
   useEffect(() => {
-    console.log('hi');
-    console.log(projectsListData);
-  }, []);
+    // Filter the projects based on the statusType
+    let filteredProjects = projectsListData;
+    if (statusType === 'On going' || statusType === 'In progress') {
+      filteredProjects = filteredProjects.filter(
+        item => item.status === 'On-Going' || item.status === 'In progress',
+      );
+    } else if (statusType === 'Completed') {
+      filteredProjects = filteredProjects.filter(
+        item => item.status === 'Completed',
+      );
+    } else if (statusType === 'Hold') {
+      filteredProjects = filteredProjects.filter(
+        item => item.status === 'Hold',
+      );
+    }
+
+    // Update the filteredProjects state
+    setFilteredProjects(filteredProjects);
+  }, [statusType, projectsListData, addingUserToggle]);
+
   return (
     <View>
-      <ScrollView>
-        {statusType === 'all' &&
-          projectsListData.map(item => <TableCell key={item._id} {...item} />)}
-
-        {(statusType === 'On going' || statusType === 'In progress') &&
-          projectsListData
-            .filter(
-              item =>
-                item.status === 'On-Going' || item.status === 'In progress',
-            )
-            .map(item => <TableCell key={item._id} {...item} />)}
-
-        {statusType === 'Completed' &&
-          projectsListData
-            .filter(item => item.status === 'Completed')
-            .map(item => <TableCell key={item._id} {...item} />)}
-
-        {statusType === 'Hold' &&
-          projectsListData
-            .filter(item => item.status === 'Hold')
-            .map(item => <TableCell key={item._id} {...item} />)}
+      <ScrollView showsVerticalScrollIndicator={false}>
+        {filteredProjects.map(item => (
+          <TableCell key={item._id} {...item} />
+        ))}
         <View style={{height: 150}}></View>
       </ScrollView>
     </View>

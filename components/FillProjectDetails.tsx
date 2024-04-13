@@ -1,3 +1,4 @@
+import React, {useContext} from 'react';
 import {
   View,
   Text,
@@ -6,19 +7,36 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import React, {useContext, useEffect, useState} from 'react';
 import uuid from 'react-native-uuid';
 import UserContext from '../context/UserContext';
+import FeatherIcons from 'react-native-vector-icons/Feather';
 
 const FillProjectDetails = ({navigation}) => {
   const {projectData, setProjectData} = useContext(UserContext);
+
+  const openDrawer = () => {
+    navigation.openDrawer();
+  };
+
+  const handleContinue = () => {
+    setProjectData({
+      ...projectData,
+      _id: uuid.v4(),
+    });
+    navigation.navigate('InviteClients');
+  };
 
   return (
     <ScrollView
       contentContainerStyle={styles.container}
       showsVerticalScrollIndicator={false}>
-      <Text style={styles.heading}>Add Project Details</Text>
-
+      <View style={styles.header}>
+        <TouchableOpacity style={styles.menuButton} onPress={openDrawer}>
+          <FeatherIcons name="menu" size={30} color="#333333" />
+        </TouchableOpacity>
+        <Text style={styles.heading}>Add Project Details</Text>
+        <View style={styles.emptyIcon}></View>
+      </View>
       <View style={styles.inputContainer}>
         <Text style={styles.inputLabel}>Project Name</Text>
         <TextInput
@@ -71,30 +89,16 @@ const FillProjectDetails = ({navigation}) => {
 
       <View style={styles.inputContainer}>
         <Text style={styles.inputLabel}>Budget</Text>
-        <View
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            gap: 20,
-            alignItems: 'center',
-          }}>
+        <View style={styles.budgetContainer}>
           <TextInput
             placeholder="Enter name"
-            style={[styles.input, {width: '80%'}]}
+            style={[styles.input, styles.budgetInput]}
           />
-          <Text style={{fontSize: 35}}>$</Text>
+          <Text style={styles.currency}>$</Text>
         </View>
       </View>
 
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-          setProjectData({
-            ...projectData,
-            _id: uuid.v4(),
-          });
-          navigation.navigate('InviteClients');
-        }}>
+      <TouchableOpacity style={styles.button} onPress={handleContinue}>
         <Text style={styles.buttonText}>Continue</Text>
       </TouchableOpacity>
     </ScrollView>
@@ -104,15 +108,26 @@ const FillProjectDetails = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    padding: 10,
-    justifyContent: 'center',
-    backgroundColor: 'white',
+    padding: 20,
+    backgroundColor: '#FFFFFF',
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  menuButton: {
+    borderRadius: 50,
   },
   heading: {
     fontSize: 25,
     fontWeight: 'bold',
-    marginBottom: 15,
     textAlign: 'center',
+    color: '#333333',
+  },
+  emptyIcon: {
+    width: 30,
   },
   inputContainer: {
     marginBottom: 20,
@@ -120,33 +135,49 @@ const styles = StyleSheet.create({
   inputLabel: {
     fontSize: 20,
     marginBottom: 10,
+    color: '#333333',
   },
   input: {
     height: 50,
     width: '100%',
-    borderColor: 'gray',
+    borderColor: '#CCCCCC',
     borderWidth: 1,
     paddingHorizontal: 10,
     borderRadius: 5,
-    fontSize: 20,
+    fontSize: 18,
+    color: '#333333',
   },
   inputLarge: {
     height: 200,
+    paddingTop: 10,
   },
   inputMedium: {
     height: 100,
+    paddingTop: 10,
+  },
+  budgetContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  budgetInput: {
+    flex: 1,
+    marginRight: 10,
+  },
+  currency: {
+    fontSize: 24,
+    color: '#333333',
   },
   button: {
-    backgroundColor: '#007bff',
+    backgroundColor: '#007BFF',
     paddingVertical: 16,
     borderRadius: 10,
     alignItems: 'center',
-    marginBottom: 50,
+    marginTop: 30,
   },
   buttonText: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: 'white',
+    color: '#FFFFFF',
   },
 });
 

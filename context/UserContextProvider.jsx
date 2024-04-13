@@ -1,14 +1,21 @@
 import React, {useState} from 'react';
 import UserContext from './UserContext';
 import getCurrentDate from '../utils/currentDate';
-import {adminCredentials, auditorCredentials, roleId} from '../config';
+import {
+  adminCredentials,
+  auditorCredentials,
+  managerCredentials,
+  roleId,
+} from '../config';
 
 function UserContextProvider({children}) {
   const [user, setUser] = useState({
-    // role: adminCredentials.adminRole,
-    // userId: adminCredentials.adminUserId,
-    role: auditorCredentials.auditorRole,
-    userId: auditorCredentials.auditorUserId,
+    role: adminCredentials.adminRole,
+    userId: adminCredentials.adminUserId,
+    // role: auditorCredentials.auditorRole,
+    // userId: auditorCredentials.auditorUserId,
+    // role: managerCredentials.managerRole,
+    // userId: managerCredentials.managerUserId,
     roleId: roleId,
   });
 

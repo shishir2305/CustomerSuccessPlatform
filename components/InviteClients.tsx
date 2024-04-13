@@ -93,6 +93,8 @@ const InviteClients = ({route}) => {
 const styles = StyleSheet.create({
   container: {
     padding: 10,
+    backgroundColor: 'white',
+    flex: 1,
   },
   header: {
     flexDirection: 'row',
@@ -109,7 +111,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   inputLabel: {
-    fontSize: 20,
+    fontSize: 19,
     marginBottom: 10,
   },
   input: {
@@ -118,7 +120,8 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     borderWidth: 1,
     paddingHorizontal: 10,
-    fontSize: 18,
+    fontSize: 17,
+    borderRadius: 5,
   },
   emailsList: {
     marginBottom: 20,

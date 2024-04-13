@@ -1,55 +1,15 @@
-import React, {useState} from 'react';
-import {
-  View,
-  Text,
-  Image,
-  TextInput,
-  TouchableOpacity,
-  StyleSheet,
-} from 'react-native';
+import React from 'react';
+import {View, StyleSheet} from 'react-native';
+import {createStackNavigator} from '@react-navigation/stack';
 import FillProjectDetails from '../components/FillProjectDetails';
 import InviteClients from '../components/InviteClients';
 import SelectProjectManager from '../components/SelectProjectManager';
-import {createStackNavigator} from '@react-navigation/stack';
-import {useNavigation} from '@react-navigation/native';
-import AntDesignIcons from 'react-native-vector-icons/AntDesign';
 
 const Stack = createStackNavigator();
 
-const searchIcons = <AntDesignIcons name="search1" size={30} color="grey" />;
-
 const NewProject = () => {
-  const navigation = useNavigation();
-  const openDrawer = () => {
-    navigation.openDrawer();
-  };
-
   return (
-    <View style={{flex: 1, padding: 10}}>
-      <View style={styles.header}>
-        <TouchableOpacity
-          style={{
-            borderRadius: 50,
-            display: 'flex',
-            alignItems: 'center',
-            gap: 5,
-          }}
-          onPress={openDrawer}>
-          <Image
-            source={require('../assets/profilepic.jpg')}
-            style={{height: 55, width: 55, borderRadius: 50}}
-          />
-          <Text style={{fontSize: 16}}>Auditor</Text>
-        </TouchableOpacity>
-        <View style={styles.searchContainer}>
-          <TextInput
-            style={styles.searchInput}
-            placeholder="Search..."
-            placeholderTextColor="#999"
-          />
-          {searchIcons}
-        </View>
-      </View>
+    <View style={styles.container}>
       <Stack.Navigator
         initialRouteName="FillProjectDetails"
         screenOptions={{headerShown: false}}>
@@ -68,26 +28,28 @@ const NewProject = () => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 10,
+    backgroundColor: 'white',
+  },
   header: {
-    display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 10,
+    marginBottom: 15,
   },
-  searchContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    width: '80%',
-    backgroundColor: '#fff',
-    borderRadius: 5,
+  menuButton: {
+    borderRadius: 50,
+    marginLeft: 10,
   },
-  searchInput: {
-    padding: 15,
-    borderRadius: 5,
-    fontSize: 20,
-    width: '80%',
+  heading: {
+    fontSize: 25,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  emptyIcon: {
+    width: 30, // Adjust according to your icon size
   },
 });
 

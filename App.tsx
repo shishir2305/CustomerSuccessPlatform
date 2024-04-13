@@ -1,11 +1,14 @@
 import React from 'react';
 import UserContextProvider from './context/UserContextProvider';
 import Main from './Main';
+import {SafeAreaView} from 'react-native';
 
 function App() {
   return (
     <UserContextProvider>
-      <Main />
+      <SafeAreaView style={{flex: 1}}>
+        <Main />
+      </SafeAreaView>
     </UserContextProvider>
   );
 }
