@@ -12,12 +12,15 @@ import UserContext from '../context/UserContext';
 import FeatherIcons from 'react-native-vector-icons/Feather';
 
 const FillProjectDetails = ({navigation}) => {
+  // using the global projectData state already set up in the usercontext
   const {projectData, setProjectData} = useContext(UserContext);
 
+  // function to toggle the navigation drawer
   const openDrawer = () => {
     navigation.openDrawer();
   };
 
+  // generating a unique id for the project along with handling continue and navigating to the next screen
   const handleContinue = () => {
     setProjectData({
       ...projectData,

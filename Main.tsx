@@ -25,6 +25,7 @@ import UserContext from './context/UserContext';
 
 const Drawer = createDrawerNavigator();
 
+// setting up the initial navigation drawer along with entire navigation flow
 const Main = () => {
   const {user} = useContext(UserContext);
   return (

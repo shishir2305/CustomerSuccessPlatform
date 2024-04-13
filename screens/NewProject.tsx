@@ -8,6 +8,7 @@ import SelectProjectManager from '../components/SelectProjectManager';
 const Stack = createStackNavigator();
 
 const NewProject = () => {
+  // setting up the navigation stack for an efficient navigation across the application
   return (
     <View style={styles.container}>
       <Stack.Navigator

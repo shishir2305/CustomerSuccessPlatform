@@ -8,6 +8,7 @@ import {
   roleId,
 } from '../config';
 
+// used a global state management technique to allow multiple components have access to the data and it remain synchronized
 function UserContextProvider({children}) {
   const [user, setUser] = useState({
     role: adminCredentials.adminRole,
@@ -19,6 +20,7 @@ function UserContextProvider({children}) {
     roleId: roleId,
   });
 
+  // initial setup for different states being used across the components
   const [addingUserToggle, setAddingUserToggle] = useState(true);
 
   const [projectsListData, setProjectsListData] = useState([]);

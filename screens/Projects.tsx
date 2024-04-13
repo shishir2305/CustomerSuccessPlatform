@@ -22,6 +22,7 @@ const menuIcon = <FeatherIcons name="menu" size={30} />;
 const Stack = createStackNavigator();
 
 const Projects = () => {
+  // setting up the navigation stack for an efficient navigation across the application
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -43,6 +44,7 @@ const ProjectsScreen = () => {
   const {user, projectsListData, setProjectsListData, addingUserToggle} =
     useContext(UserContext);
 
+  // fetching the list of projects again whenever a new user is added
   useEffect(() => {
     console.log('Updated');
     axios
@@ -59,6 +61,7 @@ const ProjectsScreen = () => {
       .catch(error => console.log('Error in fetching projects list', error));
   }, [addingUserToggle]);
 
+  // function used to toggle the navigation drawer
   const openDrawer = () => {
     navigation.openDrawer();
   };

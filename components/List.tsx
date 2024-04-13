@@ -4,6 +4,7 @@ import TableCell from './TableCell';
 import UserContext from '../context/UserContext';
 
 const Table = ({statusType}) => {
+  // getting access to the global projectListData state
   const {projectsListData, addingUserToggle, setAddingUserToggle} =
     useContext(UserContext);
   const [filteredProjects, setFilteredProjects] = useState([]);
@@ -29,6 +30,7 @@ const Table = ({statusType}) => {
     setFilteredProjects(filteredProjects);
   }, [statusType, projectsListData, addingUserToggle]);
 
+  // filtering the list based on the status of the project
   return (
     <View>
       <ScrollView showsVerticalScrollIndicator={false}>

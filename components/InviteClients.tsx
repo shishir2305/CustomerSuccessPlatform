@@ -16,13 +16,17 @@ const deleteIcon = <AntDesignIcons name="close" size={20} color="black" />;
 
 const InviteClients = ({route}) => {
   const navigation = useNavigation();
+
+  // setting up the initial states of some elements being used later
   const [clientInfo, setClientInfo] = useState({name: '', email: ''});
   const [emailsList, setEmailsList] = useState([]);
 
+  // navigating to the previous screen
   const handleBack = () => {
     navigation.goBack();
   };
 
+  // storing client name and email in an array and display it on the screen
   const handleAddEmail = () => {
     if (clientInfo.email.trim() !== '') {
       setEmailsList([...emailsList, clientInfo]);
@@ -30,6 +34,7 @@ const InviteClients = ({route}) => {
     }
   };
 
+  // when an already displayed email is clicked it get deleted from the list
   const handleDeleteEmail = email => {
     setEmailsList(emailsList.filter(e => e.email !== email));
   };

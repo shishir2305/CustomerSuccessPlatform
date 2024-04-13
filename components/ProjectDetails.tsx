@@ -18,12 +18,15 @@ const backIcon = <AntDesignIcons name="arrowleft" size={30} color="black" />;
 
 const ProjectDetails = ({route, navigation}) => {
   const [activeTab, setActiveTab] = useState('projectOverview');
+
+  // from the route params accessing the values of the passed data from previous screen
   const [projectDetails, setProjectDetails] = useState(route.params);
 
   const handleBack = () => {
     navigation.goBack();
   };
 
+  // using a step loader technique and rendering the selected component and its component on clicking a particular step
   return (
     <View style={styles.container}>
       <View style={styles.header}>

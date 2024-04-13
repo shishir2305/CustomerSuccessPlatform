@@ -11,6 +11,8 @@ const backIcon = <AntDesignIcons name="arrowleft" size={30} color="black" />;
 
 const SelectProjectManager = () => {
   const navigation = useNavigation();
+
+  // getting access to some global states for extracting already fetched data
   const {
     user,
     projectData,
@@ -22,6 +24,7 @@ const SelectProjectManager = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [currentValue, setCurrentValue] = useState('');
 
+  // fetching the list of the managers from server
   useEffect(() => {
     axios
       .get('http://localhost:8000/getManagers', {
@@ -46,9 +49,12 @@ const SelectProjectManager = () => {
     navigation.goBack();
   };
 
+  // function to add a newly created project
   const addProject = async () => {
     try {
       await axios.post('http://localhost:8000/addProject', projectData);
+
+      // resetting the state back to the initial one and navigating to the project screen
       setProjectData({
         _id: '',
         name: '',
