@@ -1,17 +1,26 @@
 import React, {useState} from 'react';
 import UserContext from './UserContext';
 import getCurrentDate from '../utils/currentDate';
-import {adminCredentials, auditorCredentials, roleId} from '../config';
+import {
+  adminCredentials,
+  auditorCredentials,
+  managerCredentials,
+  roleId,
+} from '../config';
 
+// used a global state management technique to allow multiple components have access to the data and it remain synchronized
 function UserContextProvider({children}) {
   const [user, setUser] = useState({
-    // role: adminCredentials.adminRole,
-    // userId: adminCredentials.adminUserId,
-    role: auditorCredentials.auditorRole,
-    userId: auditorCredentials.auditorUserId,
+    role: adminCredentials.adminRole,
+    userId: adminCredentials.adminUserId,
+    // role: auditorCredentials.auditorRole,
+    // userId: auditorCredentials.auditorUserId,
+    // role: managerCredentials.managerRole,
+    // userId: managerCredentials.managerUserId,
     roleId: roleId,
   });
 
+  // initial setup for different states being used across the components
   const [addingUserToggle, setAddingUserToggle] = useState(true);
 
   const [projectsListData, setProjectsListData] = useState([]);

@@ -24,14 +24,17 @@ const ScopeAndStack = props => {
   const {user, addingUserToggle, setAddingUserToggle} = useContext(UserContext);
 
   const [isOpen, setIsOpen] = useState(false);
+  // accessing the passed stack value to prepopulate the dropdown
   const [currentValue, setCurrentValue] = useState(
     props.projectDetails.stack.value,
   );
 
+  // using user based permission to disable read write permissions fo rcertain users
   const disableFields = () => {
     return user.role === 'Client' || user.role === 'Auditor';
   };
 
+  // whenever something is updated this function is executed and it does the job based on the user with write persmission
   const handleUpdate = async () => {
     if (user.role === 'Admin' || user.role === 'Manager') {
       try {

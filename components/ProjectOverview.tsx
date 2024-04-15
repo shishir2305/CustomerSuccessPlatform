@@ -10,10 +10,12 @@ import React, {useContext} from 'react';
 import UserContext from '../context/UserContext';
 
 const ProjectOverview = props => {
+  // implementing role based read write permissions based on user
   const {user} = useContext(UserContext);
   const disableFields = () => {
     return user.role === 'Client' || user.role === 'Auditor';
   };
+  // only selected users have the permission of editing the information and for rest the fields will be disabled
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.inputContainer}>
@@ -101,7 +103,6 @@ const ProjectOverview = props => {
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          // console.log(props.projectDetails);
           props.setActiveTab('scopeAndStack');
         }}>
         <Text style={styles.buttonText}>Continue</Text>

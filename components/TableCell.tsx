@@ -4,6 +4,7 @@ import {useNavigation} from '@react-navigation/native';
 import AntDesignIcons from 'react-native-vector-icons/AntDesign';
 
 const TableCell = props => {
+  // getting colors based on the status of the project
   const getStatusCellColor = status => {
     switch (status) {
       case 'On-Going':
@@ -24,6 +25,7 @@ const TableCell = props => {
   return (
     <TouchableOpacity
       onPress={() => {
+        // passing props as data to the next screen along with navigating to the next screen
         navigation.navigate('ProjectDetails', props);
       }}
       style={styles.container}>
@@ -57,8 +59,7 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 16,
     paddingVertical: 12,
-    // backgroundColor: '#FFFFFF',
-    backgroundColor: '#F5F5F5',
+    backgroundColor: '#FFFFFF',
     marginBottom: 16,
     borderRadius: 8,
     elevation: 3,
@@ -91,8 +92,7 @@ const styles = StyleSheet.create({
   },
   subTitle: {
     fontSize: 16,
-    // color: '#555',
-    color: '#777',
+    color: '#555',
     marginLeft: 4,
   },
   statusColumn: {

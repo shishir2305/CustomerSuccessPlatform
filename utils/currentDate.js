@@ -1,3 +1,4 @@
+// utitlity function to the current date in a specified format
 const getCurrentDate = () => {
   const currentDate = new Date();
   const year = currentDate.getFullYear();
